@@ -1,3 +1,4 @@
 tf-env/
 jax-env/
 *.pt
+posterior_samples.pt
