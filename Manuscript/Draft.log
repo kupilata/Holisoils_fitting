@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  24 JUN 2025 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  24 JUN 2025 23:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -379,7 +379,8 @@ Package translations Info: No language package found. I am going to use `english
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count316
 \l__pdf_internal_box=\box67
-) (./Draft.aux)
+)
+No file Draft.aux.
 \openout1 = `Draft.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
@@ -400,7 +401,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
- (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count317
 \scratchdimen=\dimen258
@@ -479,35 +480,80 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-<../E_0.png, id=15, 867.24pt x 433.62pt>
-File: ../E_0.png Graphic file (type png)
-<use ../E_0.png>
-Package pdftex.def Info: ../E_0.png  used on input line 136.
-(pdftex.def)             Requested size: 364.19667pt x 182.0993pt.
- [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3 <../E_0.png>]
-No file Draft.bbl.
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:125: Misplaced alignment tab character &.
+l.125 \item International Soil Reference &
+                                           Information Centre (Stichting Int...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:185: LaTeX Error: \begin{document} ended by \end{thebibliography}.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:125: Misplaced alignment tab character &.
+l.125 ...(Stichting International Soil Reference &
+                                                   Information Centre), ISRI...
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+[3]
+Overfull \hbox (4.90706pt too wide) in paragraph at lines 133--134
+[]\T1/cmr/m/n/12 Technical Uni-ver-sity in Zv-olen (Tech-nick� uni-verzita vo Zv-o-lene Uni-ver-sity), TUZVO,
+ []
+
+
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:150: LaTeX Error: Unicode character μ (U+03BC)
+               not set up for use with LaTeX.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.185 \end{thebibliography}
+l.150 ...renched area. The fabric had around 50 μ
+                                                  m mesh size, which prevent...
+You may provide a definition with
+\DeclareUnicodeCharacter 
+
+
+LaTeX Warning: Reference `par:devices' on page 4 undefined on input line 153.
+
+[4]
+<../E_0.png, id=41, 867.24pt x 433.62pt>
+File: ../E_0.png Graphic file (type png)
+<use ../E_0.png>
+Package pdftex.def Info: ../E_0.png  used on input line 197.
+(pdftex.def)             Requested size: 364.19667pt x 182.0993pt.
+ [5] [6 <../E_0.png>]
+No file Draft.bbl.
+
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:246: LaTeX Error: \begin{document} ended by \end{thebibliography}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.246 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:185: Extra \endgroup.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:246: Extra \endgroup.
 <recently read> \endgroup 
                           
-l.185 \end{thebibliography}
+l.246 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
-[4] (./Draft.aux)
+[7] (./Draft.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
@@ -518,21 +564,21 @@ Package rerunfilecheck Warning: File `Draft.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `Draft.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  27366737FE175C24DE96CBA18388118C;2531.
+(rerunfilecheck)             After:  8D697248FCB890C93F2A0F78F95B998F;4287.
  ) 
 Here is how much of TeX's memory you used:
- 16313 strings out of 476025
- 313643 string characters out of 5790018
+ 16352 strings out of 476025
+ 314114 string characters out of 5790018
  1856388 words of memory out of 5000000
- 36567 multiletter control sequences out of 15000+600000
- 522469 words of font info for 54 fonts, out of 8000000 for 9000
+ 36590 multiletter control sequences out of 15000+600000
+ 527582 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,10n,76p,455b,895s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on Draft.pdf (4 pages, 181994 bytes).
+ 75i,10n,76p,705b,962s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
+Output written on Draft.pdf (7 pages, 215243 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
- 22 named destinations out of 1000 (max. 500000)
+ 127 PDF objects out of 1000 (max. 8388607)
+ 94 compressed objects within 1 object stream
+ 32 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
