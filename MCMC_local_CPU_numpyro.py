@@ -72,6 +72,7 @@ day_year = jnp.array(fitting_data['day_year'].values)
 temp = jnp.array(fitting_data['temp'].values)
 resp = jnp.array(fitting_data['resp'].values)
 M = jnp.array(fitting_data['M_observed'].values)
+treatment_name = np.array(fitting_data['treatment_name'])
 
 print("Printing treatment array extract: ", treatment[1:100])
 print("Printing plot_id array extract: ", plot_id[1:100])
@@ -135,3 +136,13 @@ posterior_samples = mcmc.get_samples()
 # Save the posterior samples as a torch file
 torch.save(posterior_samples, 'posterior_samples.pt')
 print("Results saved to posterior_samples.pt")
+
+
+
+# find the categories
+# Create mapping from treatment to treatment_name
+treatment_map = dict(zip(fitting_data['treatment'], fitting_data['treatment_name']))
+
+# Get unique treatments and their corresponding names
+unique_treatments = np.unique(fitting_data['treatment'])
+unique_treatments_names = [treatment_map[t] for t in unique_treatments]

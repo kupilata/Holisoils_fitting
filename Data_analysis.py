@@ -22,6 +22,8 @@ posterior_amplitude = posterior["amplitude"]  # shape: [num_samples, Tr]
 posterior_peak_day = posterior["peak_day"]  # shape: [num_samples, Tr]
 posterior_sigma = posterior["sigma"]  # shape: [num_samples, Tr]
 
+print(posterior_Ea.shape)
+
 ## Bit of MCMC diagnostics
 # Correct number of chains and draws
 num_chains = 4

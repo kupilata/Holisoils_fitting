@@ -1,4 +1,5 @@
 {
-    "python.defaultInterpreterPath": "${workspaceFolder}/tf-env/bin/python"
+    "python.defaultInterpreterPath": "${workspaceFolder}/tf-env/bin/python",
+    "python.REPL.enableREPLSmartSend": false
   }
   
