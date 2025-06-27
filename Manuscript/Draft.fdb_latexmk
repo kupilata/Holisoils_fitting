@@ -1,17 +1,19 @@
 # Fdb version 4
-["bibtex Draft"] 1751026923 "Draft.aux" "Draft.bbl" "Draft" 1751026927 0
+["bibtex Draft"] 0 "Draft.aux" "Draft.bbl" "Draft" 0 -1
   "/usr/local/texlive/2023/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "Draft.aux" 1751026927 6730 35a4ba28481497a2fcf6a6fadd9f959d "pdflatex"
+  "Draft.aux" 1751028108 8031 74baf4b89f1858a1f25e8cc611e255c6 "pdflatex"
   "references.bib" 0 -1 0 ""
   (generated)
   "Draft.bbl"
   "Draft.blg"
   (rewritten before read)
-["pdflatex"] 1751026925 "/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex" "Draft.pdf" "Draft" 1751026927 2
-  "../co2_flux_temperature_comparison.png" 1751026794 3224299 7c670a0a23d293bddde9552383519dd7 ""
+["pdflatex"] 1751028102 "/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex" "Draft.pdf" "Draft" 1751028108 2
+  "../co2_flux_moisture_comparison.png" 1751028003 5983890 c31ffb20d028dfcc690c1f8457a3a317 ""
+  "../co2_flux_temperature_comparison.png" 1751027928 4940894 766f94738f075840ca90a6addf65bfa8 ""
   "../ea_boxplot.png" 1751014386 62388 840a15d8757aac6d9ca1223b35a71df2 ""
   "../other_params.png" 1751014400 151447 917214cfa5592997ebe71573366cc2fd ""
-  "/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex" 1751026923 12156 7befd068884b81a818daf4f39f25d21a ""
+  "../soil_temperature_moisture_comparison.png" 1751028019 9261200 9ff09ed301ca4252143c48ae03969972 ""
+  "/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex" 1751028095 12991 d2f49594f13635f3b6654beda900d38a ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -130,10 +132,10 @@
   "/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1693633472 4623355 b8cad38412faebe1ce5b780a45db67bd ""
   "/usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1693633436 7883463 e49adb818e1ffb069441b8fa0cb87eb6 ""
   "/usr/local/texlive/2023/texmf.cnf" 1678822455 577 1b2b1af17af2508fb20dd85783af4050 ""
-  "Draft.aux" 1751026927 6730 35a4ba28481497a2fcf6a6fadd9f959d "pdflatex"
+  "Draft.aux" 1751028108 8031 74baf4b89f1858a1f25e8cc611e255c6 "pdflatex"
   "Draft.bbl" 0 -1 0 "bibtex Draft"
-  "Draft.out" 1751026927 4808 3dfa9bdc02511490965bcd0ec2d8f544 "pdflatex"
-  "Draft.tex" 1751026923 12156 7befd068884b81a818daf4f39f25d21a ""
+  "Draft.out" 1751028108 4808 3dfa9bdc02511490965bcd0ec2d8f544 "pdflatex"
+  "Draft.tex" 1751028095 12991 d2f49594f13635f3b6654beda900d38a ""
   (generated)
   "Draft.aux"
   "Draft.log"

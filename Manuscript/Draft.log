@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  27 JUN 2025 15:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  27 JUN 2025 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -379,8 +379,7 @@ Package translations Info: No language package found. I am going to use `english
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count316
 \l__pdf_internal_box=\box67
-)
-No file Draft.aux.
+) (./Draft.aux)
 \openout1 = `Draft.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
@@ -401,7 +400,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
 LaTeX Font Info:    ... okay on input line 67.
-(/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count317
 \scratchdimen=\dimen258
@@ -558,46 +557,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--178
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 209.
 
-<../co2_flux_temperature_comparison.png, id=48, 1229.0718pt x 568.7649pt>
+<../co2_flux_temperature_comparison.png, id=48, 794.36775pt x 492.3996pt>
 File: ../co2_flux_temperature_comparison.png Graphic file (type png)
 <use ../co2_flux_temperature_comparison.png>
 Package pdftex.def Info: ../co2_flux_temperature_comparison.png  used on input line 215.
-(pdftex.def)             Requested size: 364.19667pt x 168.53055pt.
+(pdftex.def)             Requested size: 364.19667pt x 225.75522pt.
 [6]
-<../ea_boxplot.png, id=61, 867.24pt x 433.62pt>
+<../co2_flux_moisture_comparison.png, id=61, 855.79726pt x 492.3996pt>
+File: ../co2_flux_moisture_comparison.png Graphic file (type png)
+<use ../co2_flux_moisture_comparison.png>
+Package pdftex.def Info: ../co2_flux_moisture_comparison.png  used on input line 224.
+(pdftex.def)             Requested size: 364.19667pt x 209.54881pt.
+ [7 <../co2_flux_temperature_comparison.png>]
+<../soil_temperature_moisture_comparison.png, id=73, 857.96535pt x 492.3996pt>
+File: ../soil_temperature_moisture_comparison.png Graphic file (type png)
+<use ../soil_temperature_moisture_comparison.png>
+Package pdftex.def Info: ../soil_temperature_moisture_comparison.png  used on input line 233.
+(pdftex.def)             Requested size: 364.19667pt x 209.02287pt.
+<../ea_boxplot.png, id=74, 867.24pt x 433.62pt>
 File: ../ea_boxplot.png Graphic file (type png)
 <use ../ea_boxplot.png>
-Package pdftex.def Info: ../ea_boxplot.png  used on input line 231.
+Package pdftex.def Info: ../ea_boxplot.png  used on input line 249.
 (pdftex.def)             Requested size: 364.19667pt x 182.0993pt.
- [7 <../co2_flux_temperature_comparison.png>]
-<../other_params.png, id=74, 1011.78pt x 722.7pt>
+ [8 <../co2_flux_moisture_comparison.png> <../soil_temperature_moisture_comparison.png>]
+<../other_params.png, id=84, 1011.78pt x 722.7pt>
 File: ../other_params.png Graphic file (type png)
 <use ../other_params.png>
-Package pdftex.def Info: ../other_params.png  used on input line 240.
+Package pdftex.def Info: ../other_params.png  used on input line 257.
 (pdftex.def)             Requested size: 364.19667pt x 260.13872pt.
- [8 <../ea_boxplot.png> <../other_params.png>]
+ [9 <../ea_boxplot.png> <../other_params.png>]
 No file Draft.bbl.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:289: LaTeX Error: \begin{document} ended by \end{thebibliography}.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:306: LaTeX Error: \begin{document} ended by \end{thebibliography}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.289 \end{thebibliography}
+l.306 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:289: Extra \endgroup.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:306: Extra \endgroup.
 <recently read> \endgroup 
                           
-l.289 \end{thebibliography}
+l.306 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
-[9] (./Draft.aux)
+[10] (./Draft.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -614,18 +624,18 @@ Package rerunfilecheck Info: Checksums for `Draft.out':
 (rerunfilecheck)             After:  3DFA9BDC02511490965BCD0EC2D8F544;4808.
  ) 
 Here is how much of TeX's memory you used:
- 16375 strings out of 476025
- 314811 string characters out of 5790018
+ 16396 strings out of 476025
+ 315578 string characters out of 5790018
  1856388 words of memory out of 5000000
- 36604 multiletter control sequences out of 15000+600000
+ 36618 multiletter control sequences out of 15000+600000
  527582 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,76p,705b,962s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on Draft.pdf (9 pages, 3352749 bytes).
+Output written on Draft.pdf (10 pages, 19457725 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
- 39 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 173 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

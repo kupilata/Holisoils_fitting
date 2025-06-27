@@ -57,8 +57,8 @@ trenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == True]
 untrenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == False]
 
 # Remove rows with NaN in the variables we need
-plot_data_trenched = trenched_data.dropna(subset=['soil_temp_5cm', 'merged_flux', 'treatment'])
-plot_data_untrenched = untrenched_data.dropna(subset=['soil_temp_5cm', 'merged_flux', 'treatment'])
+plot_data_trenched = trenched_data.dropna(subset=['soil_temp_5cm', 'tsmoisture', 'merged_flux', 'treatment'])
+plot_data_untrenched = untrenched_data.dropna(subset=['soil_temp_5cm', 'tsmoisture','merged_flux', 'treatment'])
 
 # Get ALL unique treatments from both datasets to ensure consistent legend
 all_treatments = pd.concat([plot_data_trenched['treatment'], 
@@ -78,8 +78,22 @@ for i, treatment in enumerate(all_treatments):
 
 
 
-# Create figure with two subplots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 8))
+# Resolution of figures, very high DPI with larger fonts 
+plt.rcParams.update({
+    'font.size': 14,           # Base font size
+    'axes.labelsize': 16,      # X and Y labels
+    'axes.titlesize': 18,      # Subplot titles
+    'xtick.labelsize': 12,     # X tick labels
+    'ytick.labelsize': 12,     # Y tick labels
+    'legend.fontsize': 12,     # Legend
+    'figure.titlesize': 20     # Main title
+})
+
+
+
+
+# Create figure with two subplots, TEMPERATURE
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  
 
 # Calculate the common Y-axis range from both datasets
 all_flux_values = pd.concat([plot_data_trenched['merged_flux'], 
@@ -169,9 +183,230 @@ print(f"Treatments: {sorted(all_treatments)}")
 print(f"Y-axis range: {y_min:.2f} to {y_max:.2f}")
 
 # Save the figure as PNG
-plt.savefig('co2_flux_temperature_comparison.png', dpi=300, bbox_inches='tight', 
-            facecolor='white', edgecolor='none')
+
+plt.savefig('co2_flux_temperature_comparison.png', 
+            dpi=600,                    # Very high DPI for manuscripts
+            bbox_inches='tight',
+            facecolor='white', 
+            edgecolor='none',
+            format='png',
+            pil_kwargs={'optimize': True})
+
 print("Figure saved as 'co2_flux_temperature_comparison.png'")
+
+# Show the plot
+plt.show()
+
+
+
+
+
+
+# Create figure with two subplots, MOISTURE
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  
+
+# Calculate the common Y-axis range from both datasets
+all_flux_values = pd.concat([plot_data_trenched['merged_flux'], 
+                            plot_data_untrenched['merged_flux']])
+y_min = all_flux_values.min()
+y_max = all_flux_values.max()
+# Add small padding to the range
+y_padding = (y_max - y_min) * 0.05
+y_range = [y_min - y_padding, y_max + y_padding]
+
+# Plot 1: Trenched data
+for treatment in all_treatments:
+    treatment_data_trenched = plot_data_trenched[plot_data_trenched['treatment'] == treatment]
+    if len(treatment_data_trenched) > 0:
+        color, marker = treatment_style[treatment]
+        ax1.scatter(treatment_data_trenched['tsmoisture'], treatment_data_trenched['merged_flux'],
+                   c=[color], marker=marker, s=60, alpha=0.7,
+                   label=treatment, edgecolors='black', linewidth=0.5)
+
+# Customize plot 1
+ax1.set_xlabel('Soil Moisture 5cm', fontsize=12)
+ax1.set_ylabel(r'CO$_2$ flux', fontsize=12)  # LaTeX notation
+ax1.set_title('Trenched Data', fontsize=14, fontweight='bold')
+ax1.grid(True, alpha=0.3)
+ax1.set_ylim(y_range)  # Set common Y-axis range
+
+# Add correlation coefficient for trenched
+correlation_trenched = plot_data_trenched['tsmoisture'].corr(plot_data_trenched['merged_flux'])
+ax1.text(0.05, 0.95, f'r = {correlation_trenched:.3f}', transform=ax1.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
+        fontsize=11)
+
+# Add data count for trenched
+ax1.text(0.05, 0.88, f'n = {len(plot_data_trenched)}', transform=ax1.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.8),
+        fontsize=10)
+
+# Plot 2: Untrenched data
+for treatment in all_treatments:
+    treatment_data_untrenched = plot_data_untrenched[plot_data_untrenched['treatment'] == treatment]
+    if len(treatment_data_untrenched) > 0:
+        color, marker = treatment_style[treatment]
+        ax2.scatter(treatment_data_untrenched['tsmoisture'], treatment_data_untrenched['merged_flux'],
+                   c=[color], marker=marker, s=60, alpha=0.7,
+                   label=treatment, edgecolors='black', linewidth=0.5)
+
+# Customize plot 2
+ax2.set_xlabel('Soil Moisture 5cm', fontsize=12)
+ax2.set_ylabel(r'CO$_2$ flux', fontsize=12)  # LaTeX notation
+ax2.set_title('Untrenched Data', fontsize=14, fontweight='bold')
+ax2.grid(True, alpha=0.3)
+ax2.set_ylim(y_range)  # Set common Y-axis range
+
+# Add correlation coefficient for untrenched
+correlation_untrenched = plot_data_untrenched['tsmoisture'].corr(plot_data_untrenched['merged_flux'])
+ax2.text(0.05, 0.95, f'r = {correlation_untrenched:.3f}', transform=ax2.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
+        fontsize=11)
+
+# Add data count for untrenched
+ax2.text(0.05, 0.88, f'n = {len(plot_data_untrenched)}', transform=ax2.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.8),
+        fontsize=10)
+
+# Add legend only to panel 1 (trenched data) inside the plot area
+# Get handles and labels from ax1
+handles1, labels1 = ax1.get_legend_handles_labels()
+
+# Add legend inside panel 1 (upper right corner)
+ax1.legend(handles1, labels1, title='Treatment', loc='upper right', 
+          fontsize=8, title_fontsize=9, frameon=True, 
+          fancybox=True, shadow=True, framealpha=0.9)
+
+# Add overall title
+fig.suptitle(r'CO$_2$ Flux vs Soil Moisture',
+             fontsize=16, fontweight='bold')
+
+# Adjust layout to accommodate legend
+plt.tight_layout()
+plt.subplots_adjust(right=0.85)
+
+# Print statistics
+print(f"Trenched data points: {len(plot_data_trenched)}")
+print(f"Untrenched data points: {len(plot_data_untrenched)}")
+print(f"Total treatments: {len(all_treatments)}")
+print(f"Treatments: {sorted(all_treatments)}")
+print(f"Y-axis range: {y_min:.2f} to {y_max:.2f}")
+
+# Save the figure as PNG
+plt.savefig('co2_flux_moisture_comparison.png', 
+            dpi=600,                    # Very high DPI for manuscripts
+            bbox_inches='tight',
+            facecolor='white', 
+            edgecolor='none',
+            format='png',
+            pil_kwargs={'optimize': True})
+print("Figure saved as 'co2_flux_moisture_comparison.png'")
+
+# Show the plot
+plt.show()
+
+
+
+
+# Create figure with two subplots, MOISTURE vs TEMPERATURE
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  
+
+# Calculate the common Y-axis range from both datasets (now for soil temperature)
+all_temp_values = pd.concat([plot_data_trenched['soil_temp_5cm'], 
+                            plot_data_untrenched['soil_temp_5cm']])
+y_min = all_temp_values.min()
+y_max = all_temp_values.max()
+# Add small padding to the range
+y_padding = (y_max - y_min) * 0.05
+y_range = [y_min - y_padding, y_max + y_padding]
+
+# Plot 1: Trenched data
+for treatment in all_treatments:
+    treatment_data_trenched = plot_data_trenched[plot_data_trenched['treatment'] == treatment]
+    if len(treatment_data_trenched) > 0:
+        color, marker = treatment_style[treatment]
+        ax1.scatter(treatment_data_trenched['tsmoisture'], treatment_data_trenched['soil_temp_5cm'],
+                   c=[color], marker=marker, s=60, alpha=0.7,
+                   label=treatment, edgecolors='black', linewidth=0.5)
+
+# Customize plot 1
+ax1.set_xlabel('Soil Moisture', fontsize=12)
+ax1.set_ylabel('Soil Temperature 5cm (°C)', fontsize=12)
+ax1.set_title('Trenched Data', fontsize=14, fontweight='bold')
+ax1.grid(True, alpha=0.3)
+ax1.set_ylim(y_range)  # Set common Y-axis range
+
+# Add correlation coefficient for trenched
+correlation_trenched = plot_data_trenched['tsmoisture'].corr(plot_data_trenched['soil_temp_5cm'])
+ax1.text(0.05, 0.95, f'r = {correlation_trenched:.3f}', transform=ax1.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
+        fontsize=11)
+
+# Add data count for trenched
+ax1.text(0.05, 0.88, f'n = {len(plot_data_trenched)}', transform=ax1.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.8),
+        fontsize=10)
+
+# Plot 2: Untrenched data
+for treatment in all_treatments:
+    treatment_data_untrenched = plot_data_untrenched[plot_data_untrenched['treatment'] == treatment]
+    if len(treatment_data_untrenched) > 0:
+        color, marker = treatment_style[treatment]
+        ax2.scatter(treatment_data_untrenched['tsmoisture'], treatment_data_untrenched['soil_temp_5cm'],
+                   c=[color], marker=marker, s=60, alpha=0.7,
+                   label=treatment, edgecolors='black', linewidth=0.5)
+
+# Customize plot 2
+ax2.set_xlabel('Soil Moisture', fontsize=12)
+ax2.set_ylabel('Soil Temperature 5cm (°C)', fontsize=12)
+ax2.set_title('Untrenched Data', fontsize=14, fontweight='bold')
+ax2.grid(True, alpha=0.3)
+ax2.set_ylim(y_range)  # Set common Y-axis range
+
+# Add correlation coefficient for untrenched
+correlation_untrenched = plot_data_untrenched['tsmoisture'].corr(plot_data_untrenched['soil_temp_5cm'])
+ax2.text(0.05, 0.95, f'r = {correlation_untrenched:.3f}', transform=ax2.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8),
+        fontsize=11)
+
+# Add data count for untrenched
+ax2.text(0.05, 0.88, f'n = {len(plot_data_untrenched)}', transform=ax2.transAxes,
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue", alpha=0.8),
+        fontsize=10)
+
+# Add legend only to panel 1 (trenched data) inside the plot area
+# Get handles and labels from ax1
+handles1, labels1 = ax1.get_legend_handles_labels()
+
+# Add legend inside panel 1 (upper right corner)
+ax1.legend(handles1, labels1, title='Treatment', loc='upper right', 
+          fontsize=8, title_fontsize=9, frameon=True, 
+          fancybox=True, shadow=True, framealpha=0.9)
+
+# Add overall title
+fig.suptitle('Soil Temperature vs Soil Moisture: Trenched vs Untrenched Data',
+             fontsize=16, fontweight='bold')
+
+# Adjust layout to accommodate legend
+plt.tight_layout()
+plt.subplots_adjust(right=0.85)
+
+# Print statistics
+print(f"Trenched data points: {len(plot_data_trenched)}")
+print(f"Untrenched data points: {len(plot_data_untrenched)}")
+print(f"Total treatments: {len(all_treatments)}")
+print(f"Treatments: {sorted(all_treatments)}")
+print(f"Y-axis range (temperature): {y_min:.2f} to {y_max:.2f} °C")
+
+# Save the figure as PNG
+plt.savefig('soil_temperature_moisture_comparison.png',
+            dpi=600,                    # Very high DPI for manuscripts
+            bbox_inches='tight',
+            facecolor='white', 
+            edgecolor='none',
+            format='png',
+            pil_kwargs={'optimize': True})
+print("Figure saved as 'soil_temperature_moisture_comparison.png'")
 
 # Show the plot
 plt.show()
