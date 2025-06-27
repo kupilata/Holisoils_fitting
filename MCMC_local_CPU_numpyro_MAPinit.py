@@ -3,10 +3,19 @@
 
 import os
 # Set XLA flags to use more than one CPUs. These should be virtual devices, I guess, so it might still be using all allocated resources
-os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count=25"
+#os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count=25"
+
+# More aggressive CPU utilization
+os.environ["XLA_FLAGS"] = "--xla_force_host_platform_device_count=25 --xla_cpu_multi_thread_eigen=true"
+os.environ["OMP_NUM_THREADS"] = "25"  
+os.environ["MKL_NUM_THREADS"] = "25"
+os.environ["NUMEXPR_NUM_THREADS"] = "25"
+
 
 import numpy as np
 import jax
+jax.config.update('jax_platform_name', 'cpu')
+
 import jax.numpy as jnp
 from jax.random import PRNGKey
 import numpyro
@@ -19,6 +28,58 @@ import torch #just to save the torch object
 import psutil
 import time
 import threading
+
+
+# for MAP init
+from numpyro.infer import SVI, Trace_ELBO
+from numpyro.infer.autoguide import AutoNormal
+import numpyro.optim as optim
+
+
+
+# Function to find MAP using SVI
+def find_MAP_svi(model, data_dict, num_steps=3000):
+    """Find MAP estimate using Stochastic Variational Inference"""
+    print("Finding MAP estimate using SVI...")
+    
+    # Use AutoNormal guide (mean-field approximation)
+    guide = AutoNormal(model)
+    
+    # Set up SVI with Adam optimizer
+    svi = SVI(model, guide, optim.Adam(0.01), Trace_ELBO())
+    
+    # Run optimization
+    rng_key = PRNGKey(42)
+    svi_result = svi.run(rng_key, num_steps, **data_dict)
+    
+    # Get MAP estimate (median of the guide distribution)
+    map_estimate = guide.median(svi_result.params)
+    
+    print("MAP estimation completed!")
+    return map_estimate
+
+def init_around_map(map_estimate, num_chains=4, noise_scale=0.05):
+    """Initialize chains around MAP with small noise"""
+    print("Creating initialization around MAP...")
+    
+    rng_key = PRNGKey(123)
+    init_params = {}
+    
+    for param_name, map_value in map_estimate.items():
+        # Add small random noise to MAP estimate for each chain
+        keys = jax.random.split(rng_key, num_chains)
+        
+        # Create noise with same shape as parameter
+        noise = jax.vmap(
+            lambda k: jax.random.normal(k, map_value.shape) * noise_scale
+        )(keys)
+        
+        # Stack MAP estimate for each chain and add noise
+        init_params[param_name] = map_value[None, ...] + noise
+        rng_key = jax.random.split(rng_key, 1)[0]
+    
+    return init_params
+
 
 # Function to monitor and log CPU usage periodically
 def monitor_cpu_usage(interval=30, log_file="cpu_usage.log"):
@@ -115,31 +176,55 @@ def model(Tr, Pl, treatment, plot_id, day_year, temp, resp, M):
     numpyro.sample("obs", dist.Normal(model_resp, sigma), obs=resp)
 
 # Initialize NUTS kernel
-# nuts_kernel = NUTS(model, target_accept_prob=0.9)
+nuts_kernel = NUTS(model, target_accept_prob=0.9)
 
 # Initialize NUTS kernel, deeper
-nuts_kernel = NUTS(
-    model,
-    step_size=0.01,        # Smaller step size
-    adapt_step_size=True,
-    adapt_mass_matrix=True,
-    max_tree_depth=12,     # Allow deeper trees
-    target_accept_prob=0.9 # Higher acceptance rate
-)
+#nuts_kernel = NUTS(
+#    model,
+#    #step_size=0.01,        # Smaller step size
+#    adapt_step_size=True,
+#    adapt_mass_matrix=True,
+#    max_tree_depth=8,      # Moderately deep (default is 10)
+#    target_accept_prob=0.8 # Good balance (default is 0.8)
+#)
 
 print("Configure MCMC")
 mcmc = MCMC(
     nuts_kernel,
-    num_samples=25000,
+    num_samples=15000,
     num_warmup=5000,
-    num_chains=4,                  # Fully parallel
+    num_chains=24,                  # Fully parallel
     chain_method="parallel",
     progress_bar=True
 )
 
-print("# Run MCMC")
-rng_key = PRNGKey(0) #initialize the random number generators
-mcmc.run(rng_key, Tr, Pl, treatment, plot_id, day_year, temp, resp, M)
+# Prepare data dictionary for SVI
+data_dict = {
+    'Tr': Tr, 'Pl': Pl, 'treatment': treatment, 'plot_id': plot_id,
+    'day_year': day_year, 'temp': temp, 'resp': resp, 'M': M
+}
+
+# Find MAP estimate
+map_estimate = find_MAP_svi(model, data_dict, num_steps=3000)
+
+# Create initialization around MAP
+init_params = init_around_map(map_estimate, num_chains=4, noise_scale=0.05)
+
+print("# Run MCMC with MAP initialization")
+rng_key = PRNGKey(0)
+mcmc.run(rng_key, init_params=init_params, **data_dict)
+
+
+#Check convergence diagnostics
+print("\n=== Convergence Diagnostics ===")
+print(f"Divergences: {mcmc.get_extra_fields()['diverging'].sum()}")
+
+# Print R-hat for key parameters
+import arviz as az
+idata = az.from_numpyro(mcmc)
+rhat = az.rhat(idata)
+print(f"Max R-hat: {max([rhat[param].max().values for param in rhat.data_vars]):.3f}")
+
 
 # Extract posterior
 posterior_samples = mcmc.get_samples()

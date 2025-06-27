@@ -2,7 +2,7 @@
 #SBATCH --job-name=multiCPU_opt
 #SBATCH --account=project_2010938
 #SBATCH --partition=small
-#SBATCH --time=16:00:00
+#SBATCH --time 26:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=25
 #SBATCH --mem-per-cpu=4000
@@ -17,4 +17,4 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 module purge
 
-srun python3 MCMC_local_CPU_numpyro.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py
+srun python3 MCMC_local_CPU_numpyro_MAPinit.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py

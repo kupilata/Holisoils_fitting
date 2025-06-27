@@ -166,9 +166,24 @@ Soil temperature and in some cases moisture have been recorded in the upper laye
 \subsection{The database}
 
 \subsubsection{Organization of the published dataset}
+The database is published as a static resource on Zenodo (ADD LINK HERE!!!!!!!).
+
+The dataset is structured in folders, each corresponding to one site. Inside each folder, there are subfolders corresponding to the measurement series. Each mesurement series is a sampling caimpaign, during which each instrument was started and run several sampings of multiple plots.
+Inside each series subfolder there are Apache feather files corresponding to each single measurement. 
+Apache Feather is an open columnar binary file format designed for fast data interchange between different programming languages, particularly Python and R. It provides efficient serialization and deserialization of dataframes with minimal overhead, 
+which makes it ideal for storing a large number of relatively small files.\\
+
+Each feather file, so each measurement, is associated to a line in the metadata file in each site folder. This contains also the respiration fluxes estimated automatically. The estimates were in some cases trimmed manually by the uploading operators, who selected the window in the time series on which to perform the regression to calculate the fluxes. In other cases, when the operator did not select a manual trimming window, the trimming was done automatically.
+The metadata files are then collected together in one single general file in the root folder of the dataset ("All_sites.csv"), where the analyses in this study were performed.\\
+
+The dataset is distributed with both calculated flux values and raw measurements in case the user of the database would want to develop own flux estimation approaches.
+
+\subsubsection{Automatic trimming logic}
+Jani to write this.
 
 
 \subsubsection{Descriptive analysis of the data}
+
 
 \paragraph{Recoding of the treatments}
 
@@ -191,10 +206,38 @@ Provide detailed protocols that would allow others to reproduce your work. Use s
 
 \section{Results}
 
-% Example figure
+\subsubsection{Descriptive analysis}
+
+\paragraph{Soil respiration and temperature}
+% CO2 vs temperature
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{"../E_0.png"}
+    \includegraphics[width=0.8\textwidth]{"../co2_flux_temperature_comparison.png"}
+    \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
+    \label{fig:example}
+\end{figure}
+
+\paragraph{Soil respiration and moisture}
+
+
+\paragraph{Moisture and temperature interactions}
+
+
+\subsubsection{Modeling analysis}
+
+% E_0 parameter
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{"../ea_boxplot.png"}
+    \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
+    \label{fig:example}
+\end{figure}
+
+
+% Other model params (except A)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{"../other_params.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
     \label{fig:example}
 \end{figure}

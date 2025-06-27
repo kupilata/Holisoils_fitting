@@ -2,15 +2,12 @@
 # import the libraries
 #source tf-env/bin/activate
 
-
 import torch
 import seaborn as sns
 import pandas as pd
-import torch
 import arviz as az
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 posterior = torch.load("posterior_samples.pt", weights_only=False)
 print("Keys in the dictionary:", posterior.keys())
@@ -22,7 +19,17 @@ posterior_amplitude = posterior["amplitude"]  # shape: [num_samples, Tr]
 posterior_peak_day = posterior["peak_day"]  # shape: [num_samples, Tr]
 posterior_sigma = posterior["sigma"]  # shape: [num_samples, Tr]
 
-print(posterior_Ea.shape)
+
+#load the data, in case this is just an analysis run
+fitting_data = pd.read_csv("python_holisoils.csv")
+Tr = int(fitting_data['treatment'].max())
+Pl = int(fitting_data['plot_id'].max())
+# Create mapping from treatment to treatment_name
+treatment_map = dict(zip(fitting_data['treatment'], fitting_data['treatment_name']))
+# Get unique treatments and their corresponding names
+unique_treatments = np.unique(fitting_data['treatment'])
+unique_treatments_names = [treatment_map[t] for t in unique_treatments]
+
 
 ## Bit of MCMC diagnostics
 # Correct number of chains and draws
@@ -86,45 +93,54 @@ df_b_melted = pd.melt(df_b, var_name='Category', value_name='b Value')
 df_peak_day_melted = pd.melt(df_peak_day, var_name='Category', value_name='Peak Day Value')
 df_amplitude_melted = pd.melt(df_amplitude, var_name='Category', value_name='Amplitude Value')
 
+
+# Create a mapping from 'Cat X' to treatment names
+category_mapping = {f'Cat {i+1}': name for i, name in enumerate(unique_treatments_names)}
+
+# Apply the mapping
+df_Ea_melted['Category'] = df_Ea_melted['Category'].map(category_mapping)
+df_a_melted['Category'] =  df_a_melted['Category'].map(category_mapping)
+df_b_melted['Category'] =  df_b_melted['Category'].map(category_mapping)
+df_peak_day_melted['Category'] =  df_peak_day_melted['Category'].map(category_mapping)
+df_amplitude_melted['Category'] =  df_amplitude_melted['Category'].map(category_mapping)
+
+
 # Create the boxplot
 plt.figure(figsize=(12, 6))
 sns.boxplot(x='Category', y='Ea Value', data=df_Ea_melted)
-plt.title('Boxplot of Posterior Ea')
-plt.xticks(rotation=45)
+plt.ylabel('$E_0$ Value')
+plt.xlabel('') # Remove x-axis label
+plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
-plt.savefig('E_0.png')
+plt.savefig('ea_boxplot.png')  # Add this line to save the first plot
 plt.show()
-
-
-plt.figure(figsize=(12, 6))
-sns.boxplot(x='Category', y='A Value', data=df_A_melted)
-plt.title('Boxplot of Posterior A')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('A.png')
-plt.show()
-
-
 
 # Create a multi-panel layout
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-
 # Plot each boxplot in a separate panel
 sns.boxplot(x='Category', y='a Value', data=df_a_melted, ax=axes[0, 0])
 sns.boxplot(x='Category', y='b Value', data=df_b_melted, ax=axes[0, 1])
 sns.boxplot(x='Category', y='Peak Day Value', data=df_peak_day_melted, ax=axes[1, 0])
 sns.boxplot(x='Category', y='Amplitude Value', data=df_amplitude_melted, ax=axes[1, 1])
-
 # Set titles for each subplot
-axes[0, 0].set_title('Boxplot of Posterior a')
-axes[0, 1].set_title('Boxplot of Posterior b')
-axes[1, 0].set_title('Boxplot of Posterior Peak Day')
-axes[1, 1].set_title('Boxplot of Posterior Amplitude')
-
-# Rotate x-axis labels for better readability
+axes[0, 0].set_title('Posterior a')
+axes[0, 1].set_title('Posterior b')
+axes[1, 0].set_title('Posterior Peak Day')
+axes[1, 1].set_title('Posterior Amplitude')
+# Remove "Category" labels and rotate x-axis labels for better readability
 for ax in axes.flatten():
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=45)
-
+    ax.set_xlabel('') # Remove "Category" label
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
 plt.tight_layout()
-plt.savefig('other_params.png')
+plt.savefig('other_params.png')  # This saves the second plot
+plt.show()
+
+
+
+plt.figure(figsize=(12, 6))
+sns.boxplot(x='Category', y='A Value', data=df_A_melted)
+plt.title('Posterior A')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('A.png')
 plt.show()

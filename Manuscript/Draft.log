@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  24 JUN 2025 23:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  27 JUN 2025 15:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -523,34 +523,81 @@ You may provide a definition with
 LaTeX Warning: Reference `par:devices' on page 4 undefined on input line 153.
 
 [4]
-<../E_0.png, id=41, 867.24pt x 433.62pt>
-File: ../E_0.png Graphic file (type png)
-<use ../E_0.png>
-Package pdftex.def Info: ../E_0.png  used on input line 197.
+Underfull \hbox (badness 10000) in paragraph at lines 171--175
+
+ []
+
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:177: Missing $ inserted.
+<inserted text> 
+                $
+l.177 ... in the root folder of the dataset ("All_
+                                                  sites.csv"), where the ana...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:178: Missing $ inserted.
+<inserted text> 
+                $
+l.178 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (66.87482pt too wide) in paragraph at lines 176--178
+\T1/cmr/m/n/12 eral file in the root folder of the dataset ("All$[]\OML/cmm/m/it/12 ites:csv\OT1/cmr/m/n/12 ")\OML/cmm/m/it/12 ; wheretheanalysesinthisstudywereperformed:[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 176--178
+
+ []
+
+[5]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 209.
+
+<../co2_flux_temperature_comparison.png, id=48, 1229.0718pt x 568.7649pt>
+File: ../co2_flux_temperature_comparison.png Graphic file (type png)
+<use ../co2_flux_temperature_comparison.png>
+Package pdftex.def Info: ../co2_flux_temperature_comparison.png  used on input line 215.
+(pdftex.def)             Requested size: 364.19667pt x 168.53055pt.
+[6]
+<../ea_boxplot.png, id=61, 867.24pt x 433.62pt>
+File: ../ea_boxplot.png Graphic file (type png)
+<use ../ea_boxplot.png>
+Package pdftex.def Info: ../ea_boxplot.png  used on input line 231.
 (pdftex.def)             Requested size: 364.19667pt x 182.0993pt.
- [5] [6 <../E_0.png>]
+ [7 <../co2_flux_temperature_comparison.png>]
+<../other_params.png, id=74, 1011.78pt x 722.7pt>
+File: ../other_params.png Graphic file (type png)
+<use ../other_params.png>
+Package pdftex.def Info: ../other_params.png  used on input line 240.
+(pdftex.def)             Requested size: 364.19667pt x 260.13872pt.
+ [8 <../ea_boxplot.png> <../other_params.png>]
 No file Draft.bbl.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:246: LaTeX Error: \begin{document} ended by \end{thebibliography}.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:289: LaTeX Error: \begin{document} ended by \end{thebibliography}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.246 \end{thebibliography}
+l.289 \end{thebibliography}
                            
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:246: Extra \endgroup.
+/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:289: Extra \endgroup.
 <recently read> \endgroup 
                           
-l.246 \end{thebibliography}
+l.289 \end{thebibliography}
                            
 Things are pretty mixed up, but I think the worst is over.
 
-[7] (./Draft.aux)
+[9] (./Draft.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -564,21 +611,21 @@ Package rerunfilecheck Warning: File `Draft.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `Draft.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  8D697248FCB890C93F2A0F78F95B998F;4287.
+(rerunfilecheck)             After:  3DFA9BDC02511490965BCD0EC2D8F544;4808.
  ) 
 Here is how much of TeX's memory you used:
- 16352 strings out of 476025
- 314114 string characters out of 5790018
+ 16375 strings out of 476025
+ 314811 string characters out of 5790018
  1856388 words of memory out of 5000000
- 36590 multiletter control sequences out of 15000+600000
+ 36604 multiletter control sequences out of 15000+600000
  527582 words of font info for 72 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,76p,705b,962s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on Draft.pdf (7 pages, 215243 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
+Output written on Draft.pdf (9 pages, 3352749 bytes).
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
- 94 compressed objects within 1 object stream
- 32 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 163 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
