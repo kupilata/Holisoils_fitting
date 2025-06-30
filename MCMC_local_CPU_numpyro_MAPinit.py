@@ -207,8 +207,8 @@ data_dict = {
 # Find MAP estimate
 map_estimate = find_MAP_svi(model, data_dict, num_steps=3000)
 
-# Create initialization around MAP
-init_params = init_around_map(map_estimate, num_chains=4, noise_scale=0.05)
+# Create initialization around MAP - FIXED VERSION
+init_params = init_around_map(map_estimate, num_chains=24, noise_scale=0.05)  # Changed from 4 to 24
 
 print("# Run MCMC with MAP initialization")
 rng_key = PRNGKey(0)
@@ -218,6 +218,7 @@ mcmc.run(rng_key, init_params=init_params, **data_dict)
 #Check convergence diagnostics
 print("\n=== Convergence Diagnostics ===")
 print(f"Divergences: {mcmc.get_extra_fields()['diverging'].sum()}")
+
 
 # Print R-hat for key parameters
 import arviz as az
