@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{gelman1992inference}
+Andrew Gelman and Donald~B Rubin.
+\newblock Inference from iterative simulation using multiple sequences.
+\newblock {\em Statistical Science}, 7(4):457--472, 1992.
+
+\bibitem{phan2019composable}
+Du~Phan, Neeraj Pradhan, and Martin Jankowiak.
+\newblock Composable effects for flexible and accelerated probabilistic programming in numpyro.
+\newblock {\em arXiv preprint arXiv:1912.11554}, 2019.
+
+\bibitem{vehtari2021rank}
+Aki Vehtari, Andrew Gelman, Daniel Simpson, Bob Carpenter, and Paul-Christian B{\"u}rkner.
+\newblock Rank-normalization, folding, and localization: An improved $\hat{R}$ for assessing convergence of mcmc.
+\newblock {\em Bayesian Analysis}, 16(2):667--718, 2021.
+
+\end{thebibliography}

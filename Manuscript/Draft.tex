@@ -1,3 +1,11 @@
+% LaTeX Workshop: Build with recipe, latextmk
+% compilation sequence
+% pdflatex Draft.tex
+% bibtex Draft
+% pdflatex Draft.tex
+% pdflatex Draft.tex
+
+
 \documentclass[12pt,a4paper]{article}
 
 % Essential packages
@@ -6,7 +14,6 @@
 \usepackage{amsmath,amsfonts,amssymb}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{cite}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{geometry}
@@ -17,6 +24,7 @@
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{lineno}
+\usepackage{natbib}
 
 % Page setup
 \geometry{
@@ -48,18 +56,18 @@
 }
 
 % Title page information
-\title{\textbf{The impact of forest management on the temperature sensitivity of SOC decomposition in a forest gradient from mediterranean to boreal}}
+\title{\textbf{The impact of forest management on the temperature sensitivity of SOC decomposition in european forests}}
 
 \author{
-    First Author\textsuperscript{1,2}*, 
+    Lorenzo Menichetti\textsuperscript{1,2}*, 
     Second Author\textsuperscript{1}, 
     Third Author\textsuperscript{3}\\
     \\
-    \textsuperscript{1}Department of [Department], [University Name], [City, Country]\\
-    \textsuperscript{2}[Second Affiliation if applicable]\\
+    \textsuperscript{1}Natural Resources Institute Finland (LUKE), Latokartanonkaari 9 00790 Helsinki, Finland\\
+    \textsuperscript{2}Swedish University of Agricultural Sciences (SLU), Inst för Ekologi, Box 7044 750 07 Uppsala, Sweden\\
     \textsuperscript{3}[Third Institution]\\
     \\
-    *Corresponding author: email@institution.edu
+    *Corresponding author: Lorenzo.Menichetti@luke.fi
 }
 
 \date{}
@@ -122,7 +130,7 @@ The project involved a consortium of 20 project partners, 18 from EU and partner
 \item Vrije University Amsterdam (Stichting VU University), VU, Netherlands
 \item European Forest Institute, EFI, Finland
 \item Wageningen Research Foundation (Stichting Wageningen), WR, Netherlands
-\item International Soil Reference & Information Centre (Stichting International Soil Reference & Information Centre), ISRIC, Netherlands
+\item International Soil Reference \& Information Centre (Stichting International Soil Reference \& Information Centre), ISRIC, Netherlands
 \item Stockholm University (Stockholms Universitet), SU, Sweden
 \item Transylvania University of Brașov (Universitatea Transilvania din Brașov), UTBV, Romania
 \item University of Barcelona (Universitat de Barcelona), UB, Spain
@@ -130,7 +138,7 @@ The project involved a consortium of 20 project partners, 18 from EU and partner
 \item Vytautas Magnus University (Vytauto Didziojo universitetas), VMU, Lithuania
 \item Aix-Marseille University (Aix-Marseille Université), AMU, France
 \item Technical University of Munich (Technische Universität München), TUM, Germany
-\item Technical University in Zvolen (Technická univerzita vo Zvolene University), TUZVO, Slovakia
+\item Technical University in Zvolen (Technick\'{a} univerzita vo Zvolene), TUZVO, Slovakia
 \item Forest Science \& Technology Centre of Catalonia (Centre de Ciència i Tecnologia Forestal de Catalunya), CTFC, Spain
 \item National Institute for Agricultural Research (Instituto Nacional de Investigación Agropecuaria), INIA, Uruguay
 \item Forestry \& Forest Products Research Institute, FFPRI, Japan
@@ -147,7 +155,7 @@ The project involved a consortium of 20 project partners, 18 from EU and partner
 \subsubsection{Sites and treatments}
 
 \paragraph{Trenching}
-In most sites all treatments have both control and trenched subtreatments. The aim of the trenching is to remove all autotrophic respiration from the total soil respiration. Threnching areas were established (on an area of approximately 2 square meters) by digging trenches at a depth of approximately 30-40 cm and then placing root exclusion fabric around the trenched area. The fabric had around 50 μm mesh size, which prevents roots but allows mychorrizae to penetrate the area, as well as water.
+In most sites all treatments have both control and trenched subtreatments. The aim of the trenching is to remove all autotrophic respiration from the total soil respiration. Threnching areas were established (on an area of approximately 2 square meters) by digging trenches at a depth of approximately 30-40 cm and then placing root exclusion fabric around the trenched area. The fabric had around 50 $\mu$m mesh size, which prevents roots but allows mychorrizae to penetrate the area, as well as water.
 
 \subsubsection{Sampling}
 Soil CO$_2$ from control and trenched locations was measured approximately every second week with closed chambers and gas concentration analyzers (see \ref{par:devices}), basing the flux estimate on the linear regression of the concentration increase over time.
@@ -168,14 +176,13 @@ Soil temperature and in some cases moisture have been recorded in the upper laye
 \subsubsection{Organization of the published dataset}
 The database is published as a static resource on Zenodo (ADD LINK HERE!!!!!!!).
 
-The dataset is structured in folders, each corresponding to one site. Inside each folder, there are subfolders corresponding to the measurement series. Each mesurement series is a sampling caimpaign, during which each instrument was started and run several sampings of multiple plots.
+The dataset is structured in folders, each corresponding to one site. Inside each folder, there are subfolders corresponding to the measurement series. Each measurement series is a sampling campaign, during which each instrument was started and run for several samplings of multiple plots.
 Inside each series subfolder there are Apache feather files corresponding to each single measurement. 
 Apache Feather is an open columnar binary file format designed for fast data interchange between different programming languages, particularly Python and R. It provides efficient serialization and deserialization of dataframes with minimal overhead, 
 which makes it ideal for storing a large number of relatively small files.\\
 
 Each feather file, so each measurement, is associated to a line in the metadata file in each site folder. This contains also the respiration fluxes estimated automatically. The estimates were in some cases trimmed manually by the uploading operators, who selected the window in the time series on which to perform the regression to calculate the fluxes. In other cases, when the operator did not select a manual trimming window, the trimming was done automatically.
-The metadata files are then collected together in one single general file in the root folder of the dataset ("All_sites.csv"), where the analyses in this study were performed.\\
-
+The metadata files are then collected together in one single general file in the root folder of the dataset (file "All\_sites.csv"), where the analyses in this study were performed.
 The dataset is distributed with both calculated flux values and raw measurements in case the user of the database would want to develop own flux estimation approaches.
 
 \subsubsection{Automatic trimming logic}
@@ -193,61 +200,127 @@ A table here, to write together with Jani
 
 \subsection{Modeling SOC decomposition dependency on climate}
 
-Provide detailed protocols that would allow others to reproduce your work. Use subsections for different experimental approaches:
-
-
-
 
 \subsection{The model}
+Soil respiration was modeled as a function of temperature, moisture, and seasonal effects:
+\begin{equation}
+R = A \times \xi_{\text{temp}} \times \xi_{\text{moisture}} \times \xi_{\text{seasonal}} \times \lambda
+\end{equation}
 
-\subsubsection{The Bayesian framework}
+where $A$ represents baseline respiration rates (plot-specific), and the environmental multipliers are defined as follows:
+
+\textbf{Temperature sensitivity} following Lloyd and Taylor kinetics with temperature sensitivity ($E_0$):
+\begin{equation}
+\xi_{\text{temp}} = \exp\left(-\frac{E_0}{(T + 273.15) - T_0}\right)
+\end{equation}
+where $T$ is temperature (°C) and $T_0 = 227.13$ K is a reference temperature constant.
+
+\textbf{Moisture response} using a quadratic relationship:
+\begin{equation}
+\xi_{\text{moisture}} = aM - bM^2
+\end{equation}
+where $M$ is soil moisture content, and $a$ and $b$ are treatment-specific parameters controlling the shape of the moisture response curve.
+
+\textbf{Seasonal variation} through a cosine function:
+\begin{equation}
+\xi_{\text{seasonal}} = \text{amplitude} \times \cos\left(\frac{2\pi}{365} \times \text{day\_year} + \frac{2\pi}{365} \times (\text{peak\_day} - 1) - \frac{\pi}{2}\right)
+\end{equation}
+where day\_year is the day of the year (1-365), peak\_day defines the timing of maximum seasonal effect, and amplitude controls the magnitude of seasonal variation.
+
+\textbf{Trenching effect} distinguishing trenched from non-trenched plots:
+\begin{equation}
+\lambda = \begin{cases}
+1 & \text{if trenched} \\
+\text{linear\_mult} & \text{if not trenched}
+\end{cases}
+\end{equation}
+where linear\_mult represents the multiplicative effect of root presence in non-trenched plots.
+
+\subsection{The Bayesian framework}
+We used Markov Chain Monte Carlo (MCMC) sampling with the No-U-Turn Sampler (NUTS) algorithm implemented in NumPyro \citep{phan2019composable}. To improve convergence, we initialized chains around maximum a posteriori (MAP) estimates obtained through stochastic variational inference. The model was fitted using 24 parallel chains with 15,000 samples each (5,000 warmup, 10,000 retained samples).
+
+\subsubsection{Prior distributions}
+Prior distributions were informed by ecological knowledge and previous studies:
+\begin{align}
+E_0 &\sim \mathcal{N}(398.5, 20^2) && \text{(activation energies typical for soil processes)} \\
+A &\sim \mathcal{N}(400, 50^2) && \text{(baseline respiration rates)} \\
+a &\sim \mathcal{N}(3.11, 1^2) && \text{(moisture response parameters)} \\
+b &\sim \mathcal{N}(2.42, 1^2) && \text{(based on soil-water relationships)} \\
+\text{amplitude} &\sim \mathcal{N}(0, 1^2) && \text{(seasonal variation magnitude)} \\
+\text{peak\_day} &\sim \mathcal{N}(196, 10^2) && \text{(mid-growing season timing)} \\
+\text{linear\_mult} &\sim \mathcal{N}(1, 0.5^2) && \text{(trenching effect multiplier)} \\
+\sigma &\sim \text{Exp}(1) && \text{(observation error)}
+\end{align}
+
+\subsubsection{Likelihood}
+The likelihood function assumes that observed respiration measurements follow a normal distribution around the model predictions:
+\begin{equation}
+R_{\text{obs},i} \sim \mathcal{N}(R_{\text{pred},i}, \sigma^2)
+\end{equation}
+where $R_{\text{obs},i}$ is the $i$-th observed respiration measurement, $R_{\text{pred},i}$ is the corresponding model prediction, and $\sigma$ represents the standard deviation of observation errors. This formulation accounts for measurement uncertainty and natural variability not captured by the environmental predictors, with the assumption that residuals are normally distributed and homoscedastic across the range of predicted values.
+
+\subsubsection{Sampling stratification}
+The model sampling relied on stratification to ensure proper inference across the huge variety of treatments. Our sampling design incorporated three levels of stratification:
+
+\textbf{Treatment level:} The model accounts for treatment-specific parameters ($E_a$, $a$, $b$, amplitude, peak\_day) that capture systematic differences in respiration responses between experimental treatments. This allows for treatment-specific temperature sensitivities, moisture responses, and seasonal patterns, based on the assumption that treatments will influence decomposition kinetics.
+
+\textbf{Plot level:} Baseline respiration rates ($A$) were modeled as plot-specific parameters to account for spatial heterogeneity in soil properties, microbial communities, and other plot-level factors not explicitly measured. This approach recognizes that plots within the same treatment may have different inherent respiration capacities due to local environmental conditions. The most important plot-level source of variation we expect is substrate amount, meaning C stocks, and possibly local substrate quality.
+
+\textbf{Observation level:} Individual respiration measurements were treated as independent observations conditional on the plot and treatment effects, with measurement error captured through the likelihood function. This level accounts for temporal variation within plots and measurement uncertainty.
+
+Treatment effects are estimated by pooling information across all plots within each treatment, while plot-level heterogeneity is explicitly modeled rather than ignored. This stratification ensures that statistical inference properly reflects the experimental design and sampling structure of the study.
+
 
 \subsection{Implementation and hardware}
 
+All analyses were conducted in Python using JAX for numerical computing and NumPyro for Bayesian inference \citep{phan2019composable}. Computations were performed on the Puhti supercomputer cluster operated by CSC - IT Center for Science, Finland. The model was run on CPU nodes with 25 parallel processing cores allocated per job to ensure computational efficiency and optimal resource utilization within the high-performance computing environment.
 
+Convergence was assessed through visual inspection of trace plots, effective sample size diagnostics, Gelman-Rubin convergence diagnostic ($\hat{R}$) \citep{gelman1992inference, vehtari2021rank}, and absence of divergent transitions. CPU utilization and performance were monitored throughout the sampling process to ensure efficient use of computational resources. The parallel chain implementation allowed for robust convergence diagnostics by comparing results across independent chains.
+
+Model outputs provided posterior distributions for all parameters, enabling quantification of uncertainty in treatment effects and environmental sensitivities. The high-performance computing infrastructure enabled extensive sampling (15,000 samples $\times$ 24 chains) necessary for reliable posterior inference in this complex hierarchical model.
 
 
 \section{Results}
 
-\subsubsection{Descriptive analysis}
+\subsection{Descriptive analysis}
 
-\paragraph{Soil respiration and temperature}
+\subsubsection{Soil respiration and temperature}
 % CO2 vs temperature
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{"../co2_flux_temperature_comparison.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:co2_temp}
 \end{figure}
 
-\paragraph{Soil respiration and moisture}
+\subsubsection{Soil respiration and moisture}
 % CO2 vs tmoisture
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{"../co2_flux_moisture_comparison.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:co2_moisture}
 \end{figure}
 
-\paragraph{Moisture and temperature interactions}
+\subsubsection{Moisture and temperature interactions}
 % temperature vs tmoisture
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{"../soil_temperature_moisture_comparison.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:temp_moisture}
 \end{figure}
 
 
-\paragraph{Autotrophic and heterotrophic fluxes}
+\subsubsection{Autotrophic and heterotrophic fluxes}
 
-\paragraph{Moisture and temperature interactions}
+\subsubsection{Moisture and temperature interactions}
 % Time series
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{"../co2_flux_timeseries.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:timeseries}
 \end{figure}
 
 
@@ -260,14 +333,14 @@ Provide detailed protocols that would allow others to reproduce your work. Use s
     \centering
     \includegraphics[width=0.8\textwidth]{"../ea_boxplot.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:ea_boxplot}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{"../linear_multiplier.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:linear_mult}
 \end{figure}
 
 
@@ -277,7 +350,7 @@ Provide detailed protocols that would allow others to reproduce your work. Use s
     \centering
     \includegraphics[width=0.8\textwidth]{"../other_params.png"}
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
-    \label{fig:example}
+    \label{fig:other_params}
 \end{figure}
 
 
@@ -321,9 +394,7 @@ The data that support the findings of this study are available from the correspo
 
 % Bibliography
 \bibliographystyle{plain}
-\bibliography{references}
+\bibliography{library}
 
-
-\end{thebibliography}
 
 \end{document}

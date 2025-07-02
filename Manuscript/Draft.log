@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  2 JUL 2025 13:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.9.2)  2 JUL 2025 15:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -126,10 +126,6 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box53
 \@float@everytoks=\toks25
 \@floatcapt=\box54
-) (/usr/local/texlive/2023/texmf-dist/tex/latex/cite/cite.sty
-LaTeX Info: Redefining \cite on input line 302.
-LaTeX Info: Redefining \nocite on input line 332.
-Package: cite 2015/02/27  v 5.5
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
@@ -372,65 +368,52 @@ Package: lineno 2023/01/19 line numbers on paragraphs v5.1
 \bframebox=\box66
 \linenoamsmath@ams@eqpen=\count315
 LaTeX Info: Redefining \\ on input line 3131.
+) (/usr/local/texlive/2023/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip58
+\bibsep=\skip59
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count316
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 48.
-Package translations Info: No language package found. I am going to use `english' as default language. on input line 67.
+Package hyperref Info: Option `colorlinks' set `true' on input line 56.
+Package translations Info: No language package found. I am going to use `english' as default language. on input line 75.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count316
+\l__color_backend_stack_int=\count317
 \l__pdf_internal_box=\box67
-) (./Draft.aux
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-
-LaTeX Warning: Label `fig:example' multiply defined.
-
-)
+) (./Draft.aux)
 \openout1 = `Draft.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 67.
-LaTeX Font Info:    ... okay on input line 67.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 75.
+LaTeX Font Info:    ... okay on input line 75.
  (/usr/local/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count317
+\scratchcounter=\count318
 \scratchdimen=\dimen258
 \scratchbox=\box68
-\nofMPsegments=\count318
-\nofMParguments=\count319
+\nofMPsegments=\count319
+\nofMParguments=\count320
 \everyMPshowfont=\toks30
-\MPscratchCnt=\count320
+\MPscratchCnt=\count321
 \MPscratchDim=\dimen259
-\MPnumerator=\count321
-\makeMPintoPDFobject=\count322
+\MPnumerator=\count322
+\makeMPintoPDFobject=\count323
 \everyMPtoPDFconversion=\toks31
 ) (/usr/local/texlive/2023/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -444,7 +427,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 149.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 67.
+Package hyperref Info: Link coloring ON on input line 75.
  (./Draft.out) (./Draft.out)
 \@outlinefile=\write3
 \openout3 = `Draft.out'.
@@ -489,172 +472,82 @@ Package caption Info: End \AtBeginDocument code.
 (/usr/local/texlive/2023/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 67.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 78.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 78.
  (/usr/local/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:125: Misplaced alignment tab character &.
-l.125 \item International Soil Reference &
-                                           Information Centre (Stichting Int...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:125: Misplaced alignment tab character &.
-l.125 ...(Stichting International Soil Reference &
-                                                   Information Centre), ISRI...
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-[3]
-Overfull \hbox (4.90706pt too wide) in paragraph at lines 133--134
-[]\T1/cmr/m/n/12 Technical Uni-ver-sity in Zv-olen (Tech-nick� uni-verzita vo Zv-o-lene Uni-ver-sity), TUZVO,
+)
+Overfull \hbox (178.4121pt too wide) in paragraph at lines 78--78
+ [][] 
  []
 
+[1
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:150: LaTeX Error: Unicode character μ (U+03BC)
-               not set up for use with LaTeX.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.150 ...renched area. The fabric had around 50 μ
-                                                  m mesh size, which prevent...
-You may provide a definition with
-\DeclareUnicodeCharacter 
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 171--175
+{/usr/local/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}] [2{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 179--183
 
  []
 
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:177: Missing $ inserted.
-<inserted text> 
-                $
-l.177 ... in the root folder of the dataset ("All_
-                                                  sites.csv"), where the ana...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:178: Missing $ inserted.
-<inserted text> 
-                $
-l.178 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (66.87482pt too wide) in paragraph at lines 176--178
-\T1/cmr/m/n/12 eral file in the root folder of the dataset ("All$[]\OML/cmm/m/it/12 ites:csv\OT1/cmr/m/n/12 ")\OML/cmm/m/it/12 ; wheretheanalysesinthisstudywereperformed:[] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 176--178
-
- []
-
-[5]
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 212.
-
-<../co2_flux_temperature_comparison.png, id=145, 855.79726pt x 492.3996pt>
+[5] [6] [7] [8] [9]
+<../co2_flux_temperature_comparison.png, id=222, 855.79726pt x 492.3996pt>
 File: ../co2_flux_temperature_comparison.png Graphic file (type png)
 <use ../co2_flux_temperature_comparison.png>
-Package pdftex.def Info: ../co2_flux_temperature_comparison.png  used on input line 218.
+Package pdftex.def Info: ../co2_flux_temperature_comparison.png  used on input line 291.
 (pdftex.def)             Requested size: 364.19667pt x 209.54881pt.
-[6]
-<../co2_flux_moisture_comparison.png, id=154, 855.79726pt x 492.3996pt>
+<../co2_flux_moisture_comparison.png, id=224, 855.79726pt x 492.3996pt>
 File: ../co2_flux_moisture_comparison.png Graphic file (type png)
 <use ../co2_flux_moisture_comparison.png>
-Package pdftex.def Info: ../co2_flux_moisture_comparison.png  used on input line 227.
+Package pdftex.def Info: ../co2_flux_moisture_comparison.png  used on input line 300.
 (pdftex.def)             Requested size: 364.19667pt x 209.54881pt.
- [7 <../co2_flux_temperature_comparison.png>]
-<../soil_temperature_moisture_comparison.png, id=163, 857.96535pt x 492.3996pt>
+ [10 <../co2_flux_temperature_comparison.png>]
+<../soil_temperature_moisture_comparison.png, id=231, 857.96535pt x 492.3996pt>
 File: ../soil_temperature_moisture_comparison.png Graphic file (type png)
 <use ../soil_temperature_moisture_comparison.png>
-Package pdftex.def Info: ../soil_temperature_moisture_comparison.png  used on input line 236.
+Package pdftex.def Info: ../soil_temperature_moisture_comparison.png  used on input line 309.
 (pdftex.def)             Requested size: 364.19667pt x 209.02287pt.
-<../co2_flux_timeseries.png, id=164, 1082.3637pt x 884.103pt>
+<../co2_flux_timeseries.png, id=232, 1082.3637pt x 884.103pt>
 File: ../co2_flux_timeseries.png Graphic file (type png)
 <use ../co2_flux_timeseries.png>
-Package pdftex.def Info: ../co2_flux_timeseries.png  used on input line 248.
+Package pdftex.def Info: ../co2_flux_timeseries.png  used on input line 321.
 (pdftex.def)             Requested size: 364.19667pt x 297.48827pt.
- [8 <../co2_flux_moisture_comparison.png> <../soil_temperature_moisture_comparison.png>]
-<../ea_boxplot.png, id=173, 867.24pt x 433.62pt>
+ [11 <../co2_flux_moisture_comparison.png> <../soil_temperature_moisture_comparison.png>]
+<../ea_boxplot.png, id=241, 867.24pt x 433.62pt>
 File: ../ea_boxplot.png Graphic file (type png)
 <use ../ea_boxplot.png>
-Package pdftex.def Info: ../ea_boxplot.png  used on input line 261.
+Package pdftex.def Info: ../ea_boxplot.png  used on input line 334.
 (pdftex.def)             Requested size: 364.19667pt x 182.0993pt.
- [9 <../co2_flux_timeseries.png>]
-<../linear_multiplier.png, id=180, 578.16pt x 433.62pt>
+ [12 <../co2_flux_timeseries.png>]
+<../linear_multiplier.png, id=248, 578.16pt x 433.62pt>
 File: ../linear_multiplier.png Graphic file (type png)
 <use ../linear_multiplier.png>
-Package pdftex.def Info: ../linear_multiplier.png  used on input line 268.
+Package pdftex.def Info: ../linear_multiplier.png  used on input line 341.
 (pdftex.def)             Requested size: 364.19667pt x 273.14235pt.
-<../other_params.png, id=181, 1011.78pt x 722.7pt>
+<../other_params.png, id=249, 1011.78pt x 722.7pt>
 File: ../other_params.png Graphic file (type png)
 <use ../other_params.png>
-Package pdftex.def Info: ../other_params.png  used on input line 278.
+Package pdftex.def Info: ../other_params.png  used on input line 351.
 (pdftex.def)             Requested size: 364.19667pt x 260.13872pt.
- [10 <../ea_boxplot.png> <../linear_multiplier.png>] [11 <../other_params.png>]
-No file Draft.bbl.
-
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:327: LaTeX Error: \begin{document} ended by \end{thebibliography}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.327 \end{thebibliography}
-                           
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-/Users/ilmenichetti/Library/CloudStorage/OneDrive-Valtion/Holisoils/Holisoils_fitting/Manuscript/Draft.tex:327: Extra \endgroup.
-<recently read> \endgroup 
-                          
-l.327 \end{thebibliography}
-                           
-Things are pretty mixed up, but I think the worst is over.
-
-[12] (./Draft.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
+ [13 <../ea_boxplot.png> <../linear_multiplier.png>] [14 <../other_params.png>] (./Draft.bbl) [15] (./Draft.aux)
 Package rerunfilecheck Info: File `Draft.out' has not changed.
-(rerunfilecheck)             Checksum: 9CC26195BD738AAFCCBB87F097E92EF2;5005.
+(rerunfilecheck)             Checksum: 8EF4C30CD6F87313F2980F8D1C155774;6695.
  ) 
 Here is how much of TeX's memory you used:
- 16449 strings out of 476025
- 316631 string characters out of 5790018
- 1856388 words of memory out of 5000000
- 36660 multiletter control sequences out of 15000+600000
- 527582 words of font info for 72 fonts, out of 8000000 for 9000
+ 16741 strings out of 476025
+ 320300 string characters out of 5790018
+ 1862388 words of memory out of 5000000
+ 36919 multiletter control sequences out of 15000+600000
+ 529030 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,76p,705b,962s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb>
-Output written on Draft.pdf (12 pages, 22823739 bytes).
+</usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
+Output written on Draft.pdf (15 pages, 22902933 bytes).
 PDF statistics:
- 273 PDF objects out of 1000 (max. 8388607)
- 215 compressed objects within 3 object streams
- 47 named destinations out of 1000 (max. 500000)
- 252 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 365 PDF objects out of 1000 (max. 8388607)
+ 296 compressed objects within 3 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 316 words of extra memory for PDF output out of 10000 (max. 10000000)
 
