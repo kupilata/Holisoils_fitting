@@ -260,3 +260,6 @@ wholedb_ch4['soil_temp_5cm'] = pd.to_numeric(wholedb_ch4['soil_temp_5cm'], error
 # coalesce, merging personal and autotrim fluxes
 wholedb_co2['merged_flux'] = wholedb_co2['autotrim_flux'].fillna(wholedb_co2['personal_flux'])
 wholedb_ch4['merged_flux'] = wholedb_ch4['autotrim_flux'].fillna(wholedb_ch4['personal_flux'])
+
+
+

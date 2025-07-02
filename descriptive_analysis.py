@@ -58,6 +58,40 @@ print(f"Removed negative values: {len(wholedb_co2_positive) - len(wholedb_co2_lo
 # Filter out rows where merged_flux is NaN
 wholedb_co2_lowpass = wholedb_co2_lowpass.dropna(subset=['merged_flux'])
 
+# Filter out rows where 'treatment' is NA
+wholedb_co2_noNA = wholedb_co2_lowpass[~wholedb_co2_lowpass['treatment'].isna()]
+
+# Check dimensions
+print(wholedb_co2_lowpass.shape)
+print(wholedb_co2_noNA.shape)
+
+####################################################################################################
+##### store the data for running the analysis on Puhti cluster
+M_observed = wholedb_co2_noNA['tsmoisture'].copy()
+
+# M_observed[is.na(M_observed)] <- mean(M_observed, na.rm = TRUE)
+M_observed = M_observed.fillna(M_observed.mean())
+
+# Convert date column to datetime if it's not already
+wholedb_co2_noNA['date'] = pd.to_datetime(wholedb_co2_noNA['date'])
+
+python_holisoils = pd.DataFrame({
+    'treatment': wholedb_co2_noNA['treatment'].astype('category').cat.codes,  # Convert to numeric codes
+    'plot_id': wholedb_co2_noNA['point'].astype('category').cat.codes,  # Convert plot IDs to numeric codes
+    'day_year': wholedb_co2_noNA['date'].dt.dayofyear,
+    'temp': wholedb_co2_noNA['soil_temp_5cm'],
+    'resp': wholedb_co2_noNA['merged_flux'],
+    'M_observed': M_observed,
+    'M_missing': wholedb_co2_noNA['tsmoisture'].isna().astype(int),
+    'year': wholedb_co2_noNA['date'].dt.year,
+    'treatment_name': wholedb_co2_noNA['treatment'],
+    'trenched': wholedb_co2_noNA['Trenched'],
+    'site': wholedb_co2_noNA['siteid']
+})
+python_holisoils.to_csv("python_holisoils.csv", index=False)
+####################################################################################################
+
+
 
 # Create treatment mappings BEFORE any filtering
 # Get unique treatments from the full dataset

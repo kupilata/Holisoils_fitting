@@ -17,4 +17,4 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 module purge
 
-srun python3 MCMC_local_CPU_numpyro_MAPinit.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py
+srun python3 MCMC_local_CPU_numpyro_MAPinit_trench.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py
