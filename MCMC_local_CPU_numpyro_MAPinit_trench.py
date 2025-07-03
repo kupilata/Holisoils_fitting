@@ -1,4 +1,3 @@
-
 #source jax-env/bin/activate
 
 import os
@@ -35,6 +34,18 @@ from numpyro.infer import SVI, Trace_ELBO
 from numpyro.infer.autoguide import AutoNormal
 import numpyro.optim as optim
 
+
+# Function to check for invalid values in arrays
+def check_array_validity(arr, name):
+    """Check if array contains NaN or infinite values"""
+    if jnp.any(jnp.isnan(arr)):
+        print(f"WARNING: {name} contains NaN values")
+        return False
+    if jnp.any(jnp.isinf(arr)):
+        print(f"WARNING: {name} contains infinite values")
+        return False
+    print(f"{name}: OK (min={jnp.min(arr):.3f}, max={jnp.max(arr):.3f})")
+    return True
 
 
 # Function to find MAP using SVI
@@ -151,6 +162,28 @@ print("Printing temp array extract: ", temp[1:100])
 print("Printing resp array extract: ", resp[1:100])
 print("Printing M array extract: ", M[1:100])
 
+# Check data validity
+print("\n=== Data Validation ===")
+check_array_validity(treatment, "treatment")
+check_array_validity(plot_id, "plot_id")
+check_array_validity(day_year, "day_year")
+check_array_validity(temp, "temp")
+check_array_validity(resp, "resp")
+check_array_validity(M, "M")
+print(f"trenched: {jnp.sum(trenched)} True values out of {len(trenched)} total")
+
+# Additional checks
+print(f"\nData ranges:")
+print(f"Temperature range: {jnp.min(temp):.2f} to {jnp.max(temp):.2f}")
+print(f"Moisture range: {jnp.min(M):.2f} to {jnp.max(M):.2f}")
+print(f"Response range: {jnp.min(resp):.2f} to {jnp.max(resp):.2f}")
+
+# Check for negative or zero values that might cause issues
+if jnp.any(M <= 0):
+    print("WARNING: M contains non-positive values which might cause issues in M^2 term")
+if jnp.any(resp <= 0):
+    print("WARNING: resp contains non-positive values")
+
 ### this model has a linear boolean multiplier added, for trenched values
 def model(Tr, Pl, treatment, trenched, plot_id, day_year, temp, resp, M):
     # Priors
@@ -173,36 +206,113 @@ def model(Tr, Pl, treatment, trenched, plot_id, day_year, temp, resp, M):
     tr_idx = treatment.astype(int) - 1
     pl_idx = plot_id.astype(int) - 1
     
-    # Process model
-    xi_temp = jnp.exp(-Ea[tr_idx] / ((temp + 273.15) - T_0))
-    xi_moist = a[tr_idx] * M - b[tr_idx] * M**2
+    # Process model with more robust calculations
+    # Temperature component
+    temp_kelvin = temp + 273.15
+    temp_diff = temp_kelvin - T_0
+    
+    # Add small epsilon to avoid division by zero or very small denominators
+    epsilon = 1e-6
+    temp_diff = jnp.where(jnp.abs(temp_diff) < epsilon, 
+                         jnp.sign(temp_diff) * epsilon, 
+                         temp_diff)
+    
+    xi_temp = jnp.exp(-Ea[tr_idx] / temp_diff)
+    
+    # Moisture component - ensure M is positive and add bounds
+    M_safe = jnp.clip(M, 0.01, 1.0)  # Clip to reasonable range
+    xi_moist = a[tr_idx] * M_safe - b[tr_idx] * M_safe**2
+    
+    # Seasonal component
     xi_season = amplitude[tr_idx] * jnp.cos(
         (2 * jnp.pi / 365) * day_year +
         (2 * jnp.pi / 365) * (peak_day[tr_idx] - 1) -
         jnp.pi / 2
     )
     
+    # Base respiration
     base_resp = A[pl_idx] * xi_temp * xi_moist * xi_season
     
     # Apply linear multiplier only when trenched = False
-    model_resp = jnp.where(trenched, base_resp, base_resp * linear_mult)
+    # Ensure linear_mult is positive to avoid negative respiration
+    linear_mult_safe = jnp.exp(linear_mult)  # Use exp to ensure positivity
+    model_resp = jnp.where(trenched, base_resp, base_resp * linear_mult_safe)
     
-    # Likelihood
-    numpyro.sample("obs", dist.Normal(model_resp, sigma), obs=resp)
+    # Add a small positive constant to avoid issues with very small values
+    model_resp = jnp.maximum(model_resp, 1e-6)
+    
+    # Check for invalid values before likelihood
+    numpyro.deterministic("model_resp_check", model_resp)
+    
+    # Likelihood with more robust sigma
+    sigma_safe = jnp.maximum(sigma, 1e-3)  # Ensure sigma is not too small
+    numpyro.sample("obs", dist.Normal(model_resp, sigma_safe), obs=resp)
 
+
+# Test the model with some sample parameters first
+print("\n=== Testing model with sample parameters ===")
+def test_model():
+    # Create some reasonable parameter values for testing
+    test_params = {
+        "Ea": jnp.full(Tr, 398.5),
+        "A": jnp.full(Pl, 400.0),
+        "a": jnp.full(Tr, 3.11),
+        "b": jnp.full(Tr, 2.42),
+        "amplitude": jnp.full(Tr, 0.0),
+        "peak_day": jnp.full(Tr, 196.0),
+        "linear_mult": 0.0,  # exp(0) = 1
+        "sigma": 1.0
+    }
+    
+    # Test model calculation
+    try:
+        # Simulate the model calculations
+        T_0 = 227.13
+        tr_idx = treatment.astype(int) - 1
+        pl_idx = plot_id.astype(int) - 1
+        
+        temp_kelvin = temp + 273.15
+        temp_diff = temp_kelvin - T_0
+        epsilon = 1e-6
+        temp_diff = jnp.where(jnp.abs(temp_diff) < epsilon, 
+                             jnp.sign(temp_diff) * epsilon, 
+                             temp_diff)
+        
+        xi_temp = jnp.exp(-test_params["Ea"][tr_idx] / temp_diff)
+        
+        M_safe = jnp.clip(M, 0.01, 1.0)
+        xi_moist = test_params["a"][tr_idx] * M_safe - test_params["b"][tr_idx] * M_safe**2
+        
+        xi_season = test_params["amplitude"][tr_idx] * jnp.cos(
+            (2 * jnp.pi / 365) * day_year +
+            (2 * jnp.pi / 365) * (test_params["peak_day"][tr_idx] - 1) -
+            jnp.pi / 2
+        )
+        
+        base_resp = test_params["A"][pl_idx] * xi_temp * xi_moist * xi_season
+        linear_mult_safe = jnp.exp(test_params["linear_mult"])
+        model_resp = jnp.where(trenched, base_resp, base_resp * linear_mult_safe)
+        model_resp = jnp.maximum(model_resp, 1e-6)
+        
+        print("Model calculation test passed!")
+        check_array_validity(xi_temp, "xi_temp")
+        check_array_validity(xi_moist, "xi_moist")
+        check_array_validity(xi_season, "xi_season")
+        check_array_validity(base_resp, "base_resp")
+        check_array_validity(model_resp, "model_resp")
+        
+        return True
+        
+    except Exception as e:
+        print(f"Model calculation test failed: {e}")
+        return False
+
+if not test_model():
+    print("Model test failed! Stopping execution.")
+    exit(1)
 
 # Initialize NUTS kernel
 nuts_kernel = NUTS(model, target_accept_prob=0.9)
-
-# Initialize NUTS kernel, deeper
-#nuts_kernel = NUTS(
-#    model,
-#    #step_size=0.01,        # Smaller step size
-#    adapt_step_size=True,
-#    adapt_mass_matrix=True,
-#    max_tree_depth=8,      # Moderately deep (default is 10)
-#    target_accept_prob=0.8 # Good balance (default is 0.8)
-#)
 
 print("Configure MCMC")
 mcmc = MCMC(
@@ -219,7 +329,7 @@ data_dict = {
     'Tr': Tr,
     'Pl': Pl,
     'treatment': treatment,
-    'trenched': trenched,  # Add this line
+    'trenched': trenched,
     'plot_id': plot_id,
     'day_year': day_year,
     'temp': temp,
@@ -227,21 +337,30 @@ data_dict = {
     'M': M
 }
 
-# Find MAP estimate
-map_estimate = find_MAP_svi(model, data_dict, num_steps=3000)
-
-# Create initialization around MAP - FIXED VERSION
-init_params = init_around_map(map_estimate, num_chains=24, noise_scale=0.05)  # Changed from 4 to 24
-
-print("# Run MCMC with MAP initialization")
-rng_key = PRNGKey(0)
-mcmc.run(rng_key, init_params=init_params, **data_dict)
-
+print("\n=== Starting MAP estimation ===")
+try:
+    # Find MAP estimate
+    map_estimate = find_MAP_svi(model, data_dict, num_steps=3000)
+    print("MAP estimation successful!")
+    
+    # Create initialization around MAP
+    init_params = init_around_map(map_estimate, num_chains=24, noise_scale=0.05)
+    
+    print("# Run MCMC with MAP initialization")
+    rng_key = PRNGKey(0)
+    mcmc.run(rng_key, init_params=init_params, **data_dict)
+    
+except Exception as e:
+    print(f"MAP estimation failed: {e}")
+    print("Falling back to default initialization...")
+    
+    # Run without MAP initialization
+    rng_key = PRNGKey(0)
+    mcmc.run(rng_key, **data_dict)
 
 #Check convergence diagnostics
 print("\n=== Convergence Diagnostics ===")
 print(f"Divergences: {mcmc.get_extra_fields()['diverging'].sum()}")
-
 
 # Extract posterior
 posterior_samples = mcmc.get_samples()
@@ -249,5 +368,3 @@ posterior_samples = mcmc.get_samples()
 # Save the posterior samples as a torch file
 torch.save(posterior_samples, 'posterior_samples.pt')
 print("Results saved to posterior_samples.pt")
-
-

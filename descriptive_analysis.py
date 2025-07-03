@@ -70,7 +70,7 @@ print(wholedb_co2_noNA.shape)
 M_observed = wholedb_co2_noNA['tsmoisture'].copy()
 
 # M_observed[is.na(M_observed)] <- mean(M_observed, na.rm = TRUE)
-M_observed = M_observed.fillna(M_observed.mean())
+#M_observed = M_observed.fillna(M_observed.mean())
 
 # Convert date column to datetime if it's not already
 wholedb_co2_noNA['date'] = pd.to_datetime(wholedb_co2_noNA['date'])

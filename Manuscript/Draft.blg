@@ -3,44 +3,49 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: Draft.aux
 The style file: plain.bst
 Database file #1: library.bib
-You've used 3 entries,
+Repeated entry---line 56 of file library.bib
+ : @article{hoffman2014nuts
+ :                         ,
+I'm skipping whatever remains of this entry
+You've used 4 entries,
             2118 wiz_defined-function locations,
-            518 strings with 4651 characters,
-and the built_in function-call counts, 1050 in all, are:
-= -- 101
-> -- 59
+            526 strings with 4844 characters,
+and the built_in function-call counts, 1403 in all, are:
+= -- 138
+> -- 72
 < -- 0
-+ -- 23
-- -- 20
-* -- 84
-:= -- 188
-add.period$ -- 9
-call.type$ -- 3
-change.case$ -- 19
++ -- 29
+- -- 24
+* -- 112
+:= -- 245
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 24
 chr.to.int$ -- 0
-cite$ -- 3
-duplicate$ -- 32
-empty$ -- 72
-format.name$ -- 20
-if$ -- 205
+cite$ -- 4
+duplicate$ -- 43
+empty$ -- 101
+format.name$ -- 24
+if$ -- 277
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 3
-newline$ -- 18
-num.names$ -- 6
-pop$ -- 15
+int.to.str$ -- 4
+missing$ -- 4
+newline$ -- 23
+num.names$ -- 8
+pop$ -- 18
 preamble$ -- 1
-purify$ -- 16
+purify$ -- 20
 quote$ -- 0
-skip$ -- 22
+skip$ -- 30
 stack$ -- 0
-substring$ -- 65
-swap$ -- 3
+substring$ -- 102
+swap$ -- 4
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 12
+type$ -- 16
 warning$ -- 0
-while$ -- 10
-width$ -- 4
-write$ -- 34
+while$ -- 14
+width$ -- 5
+write$ -- 45
+(There was 1 error message)

@@ -237,7 +237,24 @@ where day\_year is the day of the year (1-365), peak\_day defines the timing of 
 where linear\_mult represents the multiplicative effect of root presence in non-trenched plots.
 
 \subsection{The Bayesian framework}
-We used Markov Chain Monte Carlo (MCMC) sampling with the No-U-Turn Sampler (NUTS) algorithm implemented in NumPyro \citep{phan2019composable}. To improve convergence, we initialized chains around maximum a posteriori (MAP) estimates obtained through stochastic variational inference. The model was fitted using 24 parallel chains with 15,000 samples each (5,000 warmup, 10,000 retained samples).
+
+We employed a two-stage Bayesian inference approach to ensure robust parameter estimation and convergence in this complex hierarchical model. The procedure consisted of an initial variational approximation phase followed by full MCMC sampling.
+
+\subsubsection{Variational inference for MAP estimation}
+Prior to MCMC sampling, we obtained maximum a posteriori (MAP) parameter estimates using stochastic variational inference (SVI) implemented in NumPyro. This pre-estimation step serves multiple purposes: it provides good starting values for the MCMC chains, reduces burn-in time, and helps identify potential convergence issues before computationally expensive full sampling.
+The SVI approach uses an AutoNormal guide, which assumes a mean-field variational approximation where each parameter is independently normally distributed. This approximation, while simpler than the true posterior, provides a computationally efficient way to locate the posterior mode. The optimization was performed using the Adam optimizer with a learning rate of 0.01, running for 3,000 iterations to ensure convergence of the variational parameters.
+
+The variational objective minimizes the evidence lower bound (ELBO):
+\begin{equation}
+\text{ELBO} = \mathbb{E}_{q_\phi(\theta)}[\log p(y|\theta) + \log p(\theta) - \log q_\phi(\theta)]
+\end{equation}
+where $q_\phi(\theta)$ is the variational approximation with parameters $\phi$, $p(y|\theta)$ is the likelihood, and $p(\theta)$ represents the prior distributions.
+
+\subsubsection{MCMC initialization and sampling}
+
+Using the MAP estimates from SVI, we initialized 24 parallel MCMC chains by adding small random perturbations (noise scale = 0.05) around the MAP values. This initialization strategy, known as "jittering," ensures that chains start from different but reasonable locations in parameter space, facilitating better exploration of the posterior distribution while avoiding poor local optima that can occur with random initialization.
+The MCMC sampling employed the No-U-Turn Sampler (NUTS) algorithm \citep{hoffman2014nuts}. NUTS is particularly well-suited for high-dimensional problems like our hierarchical model, as it can efficiently navigate complex posterior geometries. We configured NUTS with a target acceptance probability of 0.9.
+Each chain was run for 20,000 iterations total: 5,000 warmup samples, followed by 15,000 retained samples for posterior inference. The warmup phase allows NUTS to learn the local geometry of the posterior distribution, which is crucial for efficient sampling in subsequent iterations. The parallel chain approach enables both computational efficiency (especially in our case, run on a highly parallelized cluster, see Section~\ref{sec:implementation}) and robust convergence diagnostics through between-chain comparisons.
 
 \subsubsection{Prior distributions}
 Prior distributions were informed by ecological knowledge and previous studies:
@@ -271,7 +288,14 @@ The model sampling relied on stratification to ensure proper inference across th
 Treatment effects are estimated by pooling information across all plots within each treatment, while plot-level heterogeneity is explicitly modeled rather than ignored. This stratification ensures that statistical inference properly reflects the experimental design and sampling structure of the study.
 
 
-\subsection{Implementation and hardware}
+\subsection{Missing Values Imputation Approach}
+Due to sampling issues and diversity of the sampling approaches between sites, our dataset contained missing values for soil temperature (18.5\% of observations) and particumarly soil moisture (41.8\% of observations). Rather than using traditional approaches like mean imputation or listwise deletion, which can introduce bias or reduce statistical power, or dropping completely the moisture function discarding some available information, we implemented a hierarchical Bayesian missing data model that accounts for site-specific patterns while properly propagating uncertainty.
+Due to computational constraints, missing values were modeled using site-level parameters, assuming that temperature and moisture are relatively constant within a same site:soil moisture followed $M_{\text{mean},s} \sim \text{Beta}(2,2)$ scaled to $[0.1, 0.9]$ and temperature followed $T_{\text{mean},s} \sim \text{Normal}(15, 10)$, where $s$ indexes monitoring sites.
+Missing observations were then imputed from their corresponding site-specific distributions within the main Bayesian model, ensuring uncertainty propagation through all parameter estimates. This approach reduced the missing data parameter space from potentially thousands of individual parameters to 4 parameters per site (N = Z sites), resulting in substantial computational efficiency gains while maintaining biological realism and proper uncertainty quantification. A model imputing missing values independently for each value would of course be more accurate in theory, but would imply an unfeasible number of Bayesian parameters in the model (many thousands) with consequent prohibitive memory and power requirements.
+
+
+
+\subsection{Implementation and hardware}\label{sec:implementation}
 
 All analyses were conducted in Python using JAX for numerical computing and NumPyro for Bayesian inference \citep{phan2019composable}. Computations were performed on the Puhti supercomputer cluster operated by CSC - IT Center for Science, Finland. The model was run on CPU nodes with 25 parallel processing cores allocated per job to ensure computational efficiency and optimal resource utilization within the high-performance computing environment.
 
@@ -386,9 +410,13 @@ This work was supported by [Grant Agency] under Grant [Number]. [Author Name] wa
 The authors declare no conflicts of interest.
 
 
-\section*{Data Availability Statement}
+\section*{Data and Code Availability}
 
-The data that support the findings of this study are available from the corresponding author upon reasonable request [or specify repository/database where data are deposited].
+The data that support the findings of this study are available as Open Data . . .
+
+The code used for this analysis is available (for repeatability purposes, but the code is specific to the cluster we run it onto and needs some adaptation to run on other machines) at \url{https://github.com/ilmenichetti/Holisoils_fitting}
+
+
 
 
 

@@ -5,7 +5,7 @@
 #SBATCH --time 26:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=25
-#SBATCH --mem-per-cpu=4000
+#SBATCH --mem-per-cpu=12000
 #SBATCH --output=mcmc_output.log
 #SBATCH --error=mcmc_error.log
 
@@ -17,4 +17,4 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 module purge
 
-srun python3 MCMC_local_CPU_numpyro_MAPinit_trench.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py
+srun python3 MCMC_local_CPU_numpyro_MAPinit_trench_missingimpute.py --data_path=$LOCAL_SCRATCH/cifar-10-batches-py
