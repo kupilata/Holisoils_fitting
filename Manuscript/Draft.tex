@@ -162,6 +162,9 @@ Soil CO$_2$ from control and trenched locations was measured approximately every
 Measurement points for the soil chambers have been established with metal or plastic collars, or in some cases (organic soils) by installing the chamber deeper into the soil, to ensure that there was not air flow between the chamber and the atmosphere.
 
 \paragraph{Devices}\label{par:devices}
+ASK SITE OWNER!!!!!
+
+
 
 
 \paragraph{Covariates}
@@ -299,7 +302,7 @@ Missing observations were then imputed from their corresponding site-specific di
 
 All analyses were conducted in Python using JAX for numerical computing and NumPyro for Bayesian inference \citep{phan2019composable}. Computations were performed on the Puhti supercomputer cluster operated by CSC - IT Center for Science, Finland. The model was run on CPU nodes with 25 parallel processing cores allocated per job to ensure computational efficiency and optimal resource utilization within the high-performance computing environment.
 
-Convergence was assessed through visual inspection of trace plots, effective sample size diagnostics, Gelman-Rubin convergence diagnostic ($\hat{R}$) \citep{gelman1992inference, vehtari2021rank}, and absence of divergent transitions. CPU utilization and performance were monitored throughout the sampling process to ensure efficient use of computational resources. The parallel chain implementation allowed for robust convergence diagnostics by comparing results across independent chains.
+Convergence was assessed through visual inspection of trace plots and Gelman-Rubin convergence diagnostic ($\hat{R}$) \citep{gelman1992inference, vehtari2021rank}. By implementing the sampling with a high number of parallel chains we allowed for robust convergence diagnostics by comparing results across independent chains.
 
 Model outputs provided posterior distributions for all parameters, enabling quantification of uncertainty in treatment effects and environmental sensitivities. The high-performance computing infrastructure enabled extensive sampling (15,000 samples $\times$ 24 chains) necessary for reliable posterior inference in this complex hierarchical model.
 
@@ -352,6 +355,14 @@ Model outputs provided posterior distributions for all parameters, enabling quan
 
 \subsubsection{Modeling analysis}
 
+% Model predictions
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{"../ea_boxplot.png"}
+    \caption{Model predictions here}
+    \label{fig:ea_boxplot}
+\end{figure}
+
 % E_0 parameter
 \begin{figure}[H]
     \centering
@@ -366,7 +377,6 @@ Model outputs provided posterior distributions for all parameters, enabling quan
     \caption{Example figure caption. Describe what the figure shows, including experimental conditions, sample sizes, and statistical tests. Error bars represent standard error of the mean. *p < 0.05, **p < 0.01.}
     \label{fig:linear_mult}
 \end{figure}
-
 
 
 % Other model params (except A)
@@ -385,6 +395,15 @@ Model outputs provided posterior distributions for all parameters, enabling quan
 
 
 \subsection{Limitations}
+
+\subsubsection{Data limitations}
+
+\paragraph{Mositure data}
+
+
+
+\subsubsection{Model limitations}
+
 
 \subsection{Implications and Future Directions}
 

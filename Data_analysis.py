@@ -5,15 +5,15 @@
 import torch
 import seaborn as sns
 import pandas as pd
-import arviz as az
+#import arviz as az
 import numpy as np
 import matplotlib.pyplot as plt
 
+import jax.numpy as jnp
 
 
 
 posterior = torch.load("posterior_samples.pt", weights_only=False)
-print("Keys in the dictionary:", posterior.keys())
 posterior_Ea = posterior["Ea"]  # shape: [num_samples, Tr]
 posterior_A = posterior["A"]  # shape: [num_samples, Pl]
 posterior_a = posterior["a"]  # shape: [num_samples, Tr]
@@ -23,8 +23,11 @@ posterior_peak_day = posterior["peak_day"]  # shape: [num_samples, Tr]
 posterior_sigma = posterior["sigma"]  # shape: [num_samples, Tr]
 posterior_linear_mult = posterior["linear_mult"]  # shape: [num_samples, Tr]
 
+print("Available keys in posterior samples:")
+print(list(posterior.keys()))
 
-#load the data, in case this is just an analysis run
+
+#load the data
 fitting_data = pd.read_csv("python_holisoils.csv")
 Tr = int(fitting_data['treatment'].max())
 Pl = int(fitting_data['plot_id'].max())
@@ -34,19 +37,15 @@ treatment_map = dict(zip(fitting_data['treatment'], fitting_data['treatment_name
 unique_treatments = np.unique(fitting_data['treatment'])
 unique_treatments_names = [treatment_map[t] for t in unique_treatments]
 
-
-# Print R-hat for key parameters
-idata = az.from_numpyro(mcmc)
-rhat = az.rhat(idata)
-print(f"Max R-hat: {max([rhat[param].max().values for param in rhat.data_vars]):.3f}")
-
-
+# For missing values, use placeholder values (will be estimated by the model)
+M_observed_with_placeholders = fitting_data['M_observed'].fillna(0.5)  # Neutral placeholder
+temp_with_placeholders = fitting_data['temp'].fillna(fitting_data['temp'].median())  # Use median as placeholder
 
 
 
 ## Bit of MCMC diagnostics
 # Correct number of chains and draws
-num_chains = 4
+num_chains = 24
 num_draws = 15000
 
 # Reshape the tensors to (num_chains, num_draws, *shape)

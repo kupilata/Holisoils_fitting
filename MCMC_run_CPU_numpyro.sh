@@ -2,10 +2,10 @@
 #SBATCH --job-name=multiCPU_opt
 #SBATCH --account=project_2010938
 #SBATCH --partition=small
-#SBATCH --time 26:00:00
+#SBATCH --time 65:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=25
-#SBATCH --mem-per-cpu=12000
+#SBATCH --mem-per-cpu=15000
 #SBATCH --output=mcmc_output.log
 #SBATCH --error=mcmc_error.log
 

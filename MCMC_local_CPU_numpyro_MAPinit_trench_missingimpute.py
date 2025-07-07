@@ -12,6 +12,7 @@ os.environ["NUMEXPR_NUM_THREADS"] = "25"
 
 
 import numpy as np
+import pandas as pd
 import jax
 jax.config.update('jax_platform_name', 'cpu')
 
@@ -20,7 +21,6 @@ from jax.random import PRNGKey
 import numpyro
 import numpyro.distributions as dist
 from numpyro.infer import MCMC, NUTS
-import pandas as pd
 import torch #just to save the torch object
 
 ########## Block to start monitoring CPU, writes in cpu_usage.log #########################
@@ -32,7 +32,7 @@ import threading
 from numpyro.infer import SVI, Trace_ELBO
 from numpyro.infer.autoguide import AutoNormal
 import numpyro.optim as optim
-
+from numpyro.infer import Predictive
 
 # Function to check for invalid values in arrays
 def check_array_validity(arr, name):
@@ -398,7 +398,8 @@ mcmc = MCMC(
     num_warmup=5000,
     num_chains=24,
     chain_method="parallel",
-    progress_bar=True
+    progress_bar=True,
+    thinning=2  # Store every 2nd sample
 )
 
 # Prepare data dictionary for SVI and MCMC
@@ -448,13 +449,52 @@ if divergences > 0:
     print(f"Warning: {divergences} divergent transitions detected!")
     print("Consider increasing target_accept_prob or reducing step size")
 
-# Extract posterior
+# Extract posterior and predictions
 posterior_samples = mcmc.get_samples()
+
+# Clear MCMC object to free memory before post-processing
+del mcmc
+import gc; gc.collect()
+
+
+# Save the posterior samples as a torch file
+torch.save(posterior_samples, 'posterior_samples.pt')
+print("Posteriors saved to posterior_samples.pt")
+
+
+
+
+# Get predictions from the posterior
+print("Generating model predictions...")
+thinned_posterior = {}
+thin_factor = 10  # Use every 10th sample for predictions
+for key, value in posterior_samples.items():
+    thinned_posterior[key] = value[::thin_factor]
+
+predictive = Predictive(model, thinned_posterior)
+
+data_dict_pred = data_dict.copy()
+data_dict_pred['resp'] = None  # Don't condition on observations
+predictions_dict = predictive(rng_key, **data_dict_pred)
+
+
+# Save everything together
+complete_results = {
+    **posterior_samples,  # All parameters
+    'model_resp': predictions_dict['model_resp'],
+    'M_complete': predictions_dict['M_complete'],
+    'temp_complete': predictions_dict['temp_complete'],
+    'site_M_mean_scaled': predictions_dict['site_M_mean_scaled'],
+    'site_temp_mean_est': predictions_dict['site_temp_mean_est'],
+    'xi_temp': predictions_dict['xi_temp'],
+    'xi_moist': predictions_dict['xi_moist'],
+    'xi_season': predictions_dict['xi_season']
+}
 
 # Print site-level missing data results
 print(f"\n=== Site-Level Missing Data Results ===")
-site_M_means_posterior = posterior_samples['site_M_mean_scaled']
-site_temp_means_posterior = posterior_samples['site_temp_mean_est']  # Updated variable name
+site_M_means_posterior = predictions_dict['site_M_mean_scaled']
+site_temp_means_posterior = predictions_dict['site_temp_mean_est']
 
 print("Site-level moisture estimates:")
 for i, site in enumerate(sites):
@@ -468,9 +508,9 @@ for i, site in enumerate(sites):
     std_est = jnp.std(site_temp_means_posterior[:, i])
     print(f"  {site}: Temp = {mean_est:.2f} ± {std_est:.2f}°C")
 
-# Save the posterior samples as a torch file
-torch.save(posterior_samples, 'posterior_samples_site_level.pt')
-print("Results saved to posterior_samples_site_level.pt")
+# Save the complete results as a torch file
+torch.save(complete_results, 'posterior_with_predictions.pt')
+print("Posteriors+results saved to posterior_with_predictions.pt")
 
 print(f"\n=== Final Summary ===")
 print(f"Successfully completed MCMC with {mcmc.num_samples} samples per chain")
