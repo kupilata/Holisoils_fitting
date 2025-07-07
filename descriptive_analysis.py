@@ -108,7 +108,7 @@ treatment_style = {}
 for i, treatment in enumerate(all_treatments):
     treatment_style[treatment] = (colors[i], markers[i])
 
-
+np.unique(wholedb_co2_lowpass['siteid'])
 
 
 ############### Environmental variables plotting
@@ -174,6 +174,10 @@ plt.rcParams.update({
     'legend.fontsize': 12,     # Legend
     'figure.titlesize': 20     # Main title
 })
+
+
+np.unique(trenched_data['siteid'])
+np.unique(untrenched_data['siteid'])
 
 
 
@@ -504,15 +508,24 @@ plt.show()
 
 
 # Ensure date column is datetime and filter nulls
-wholedb_co2['date'] = pd.to_datetime(wholedb_co2_lowpass['date'])
+wholedb_co2_lowpass['date'] = pd.to_datetime(wholedb_co2_lowpass['date'])
 data_clean = wholedb_co2_lowpass.dropna(subset=['merged_flux'])
 
+# Check data
+np.unique(data_clean['siteid'])
+print("Infinite values in merged_flux:", np.isinf(data_clean['merged_flux']).sum())
+print("Data types:", data_clean.dtypes)
+print("Merged flux stats:", data_clean['merged_flux'].describe())
 
-# Create FacetGrid
+# Check for any problematic values
+print("Unique treatment values:", data_clean['treatment'].unique())
+print("Unique Trenched values:", data_clean['Trenched'].unique())
+
+
+# Now your plot should work
 g = sns.FacetGrid(data_clean, col='siteid', col_wrap=4, height=3, aspect=1.2)
-
-# Map line plot for each treatment
 g.map_dataframe(sns.lineplot, x='date', y='merged_flux', hue='treatment', style='Trenched', alpha=0.8, palette=colors)
+
 
 
 # Customize

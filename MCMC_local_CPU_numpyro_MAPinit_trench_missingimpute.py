@@ -134,7 +134,8 @@ print("Loading data")
 fitting_data = pd.read_csv("python_holisoils.csv")
 Tr = int(fitting_data['treatment'].max())
 Pl = int(fitting_data['plot_id'].max())
-print("Treatments:", Tr, "Plots:", Pl)
+unique_sites = np.unique(fitting_data['site'])
+print("Treatments:", Tr, "Plots:", Pl, "Sites", unique_sites )
 
 
 #### Filter out Saint Mitre, temporary hopefully. There seems to be a unit conversion error !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

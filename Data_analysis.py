@@ -36,6 +36,7 @@ treatment_map = dict(zip(fitting_data['treatment'], fitting_data['treatment_name
 # Get unique treatments and their corresponding names
 unique_treatments = np.unique(fitting_data['treatment'])
 unique_treatments_names = [treatment_map[t] for t in unique_treatments]
+unique_sites = np.unique(fitting_data['site'])
 
 # For missing values, use placeholder values (will be estimated by the model)
 M_observed_with_placeholders = fitting_data['M_observed'].fillna(0.5)  # Neutral placeholder
