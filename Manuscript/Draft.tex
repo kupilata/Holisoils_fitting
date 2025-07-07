@@ -25,6 +25,13 @@
 \usepackage{siunitx}
 \usepackage{lineno}
 \usepackage{natbib}
+\usepackage{multirow}
+\usepackage{pdflscape}
+
+%to add the prime symbols to arcim and arcsec coordinates
+\usepackage{textcomp}
+\newcommand{\arcmin}{\ensuremath{^{\prime}}}
+\newcommand{\arcsec}{\ensuremath{^{\prime\prime}}}
 
 % Page setup
 \geometry{
@@ -62,12 +69,15 @@
     Lorenzo Menichetti\textsuperscript{1,2}*, 
     Second Author\textsuperscript{1}, 
     Third Author\textsuperscript{3}\\
+    Etc.\textsuperscript{3}\\
     \\
-    \textsuperscript{1}Natural Resources Institute Finland (LUKE), Latokartanonkaari 9 00790 Helsinki, Finland\\
-    \textsuperscript{2}Swedish University of Agricultural Sciences (SLU), Inst för Ekologi, Box 7044 750 07 Uppsala, Sweden\\
+    \textsuperscript{1}Natural Resources Institute Finland (LUKE), \\
+    \hspace*{0.5cm}Latokartanonkaari 9 00790 Helsinki, Finland\\
+    \textsuperscript{2}Swedish University of Agricultural Sciences (SLU), \\
+    \hspace*{0.5cm}Inst för Ekologi, Box 7044 750 07 Uppsala, Sweden\\
     \textsuperscript{3}[Third Institution]\\
     \\
-    *Corresponding author: Lorenzo.Menichetti@luke.fi
+    *Corresponding author: \href{mailto:Lorenzo.Menichetti@luke.fi}{Lorenzo.Menichetti@luke.fi}
 }
 
 \date{}
@@ -151,8 +161,79 @@ The project involved a consortium of 20 project partners, 18 from EU and partner
 
 
 \subsection{Sites and study design}
+\begin{landscape}
+\begin{table}[htbp]
+\centering
+\caption{Summary of study sites}
+\label{tab:study_sites}
+\footnotesize
+\begin{tabular}{p{2.1cm}p{2.2cm}p{2.5cm}p{2.2cm}p{2.8cm}p{2.6cm}p{3.2cm}}
+\toprule
+\textbf{Country} & \textbf{Site} & \textbf{Coordinates} & \textbf{Climate} & \textbf{Dominant Species} & \textbf{Soil Type} & \textbf{Treatments} \\
+\midrule
+\multirow{2}{*}{\textbf{Finland}} 
+& Karstula & 62\textdegree54\arcmin43.343\arcsec N; 24\textdegree34\arcmin16.021\arcsec E & Boreal & Scots pine & Sandy loam & Long-term fertilization (1950s) \\
+& Ränskälänkorpi & 61\textdegree11\arcmin N, 25\textdegree16\arcmin E & Boreal & Norway spruce & Drained peatland & Control, clear-cut, selection harvest \\
+\midrule
+\textbf{Germany} & Kranzberg & 48\textdegree25\arcmin8.4\arcsec N; 11\textdegree39\arcmin39.6\arcsec E & Continental (Dfb) & Norway spruce / Mixed spruce-beech & Cambisols, luvisols & Precipitation gradient, drought legacy \\
+& Kalheim & 11\textdegree49'19.2''E; 48\textdegree56'8.16''N & Continental (Dfb) & Norway spruce / Mixed spruce-beech & Terra fusca-cambisol & Precipitation gradient, drought legacy \\
+& Wasserburg & 12\textdegree04'22.8''E; 48\textdegree08'31.2''N & Continental (Dfb) & Norway spruce / Mixed spruce-beech & Cambisols, luvisols & Precipitation gradient, drought legacy \\
+\midrule
+\multirow{3}{*}{\textbf{Netherlands}} 
+& Kroondomein & 52\textdegree12\arcmin18.17\arcsec N; 5\textdegree51\arcmin54.47\arcsec E & Maritime (Cfb) & Scots pine & Poor sandy (Albic Podzol) & Control, high-thinning, shelterwood, clearcut \\
+& Zwolse Bos & 52\textdegree25\arcmin14.41\arcsec N; 6\textdegree2\arcmin3.67\arcsec E & Maritime (Cfb) & Scots pine & Poor sandy (Albic Podzol) & Control, thinning (9\%), shelterwood (61\%), clearcut (100\%) \\
+& Hoge Veluwe & 52\textdegree5\arcmin23.95\arcsec N; 5\textdegree48\arcmin14.68\arcsec E & Maritime (Cfb) & Scots pine & Poor sandy (Dystric Cambisol) & Same 4 treatments as above \\
+\midrule
+\multirow{2}{*}{\textbf{France}} 
+& St. Mitre & 43\textdegree27\arcmin0\arcsec N; 5\textdegree2\arcmin24\arcsec E & Mediterranean (Csa) & Aleppo pine & Sandy loamy calcareous & Thinning intensity $\times$ understory management \\
+& St. Christol & 44\textdegree02\arcmin58.0\arcsec N 5\textdegree32\arcmin35.8\arcsec E & Mediterranean (Csa) & \textit{Quercus pubescens} & Calcisol & Control, CD50$\pm$Slash, CD100$\pm$Slash \\
+\midrule
+\multirow{2}{*}{\textbf{Spain}} 
+& Gamiz & 42\textdegree49\arcmin2.32\arcsec N; 2\textdegree37\arcmin10.67\arcsec W & Oceanic (Cfb) & \textit{Quercus faginea} & Clay loam Luvisol & Control, CD50$\pm$Slash, CD100$\pm$Slash \\
+& Llobera & 41\textdegree57\arcmin08\arcsec N; 1\textdegree27\arcmin55\arcsec E & Sub-Mediterranean & Black pine (\textit{P. nigra}) & Lithic or Typic Xerorthent & Light/heavy thinning $\pm$ prescribed burning \\
+& Secanella & 41\textdegree56'16''N; 1\textdegree26'05''E & Sub-Mediterranean & Black pine (\textit{P. nigra}) & Lithic or Typic Xerorthent & Light/heavy thinning $\pm$ prescribed burning \\
+\midrule
+\textbf{Slovakia} & Dobroc & 48\textdegree40'24.6''N; 19\textdegree40'44.4''E & Continental (Dfb) & Norway spruce / Mixed forest & Dystric Cambisol & Monoculture vs mixed stand \\
+\midrule
+\textbf{Romania} & Dumbravita & 45\textdegree46\arcmin10.0\arcsec N; 25\textdegree28\arcmin26.0\arcsec E & Continental (Dfb) & \textit{Quercus robur} & Cambisol & Control, CD50$\pm$Slash, CD100$\pm$Slash \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{landscape}
 
-\subsubsection{Sites and treatments}
+\textbf{Treatment abbreviations:}
+CD50/CD100: 50\%/100\% canopy removal; $\pm$Slash: with/without logging residue management; BA: Basal area reduction percentage
+
+\subsubsection{Finland}
+\paragraph{Karstula}
+Long-term fertilization experiment site established in late 1950s by Finnish Forest Research Institute in Scots pine forest on sandy loam soils.
+\paragraph{Ränskälänkorpi}
+Norway spruce site on drained peatland with control, clear-cut, and selection harvest areas. CO2 flux measurements using eddy covariance towers and automatic chambers with continuous soil temperature and moisture monitoring.
+
+\subsubsection{Germany}
+\paragraph{Kranzberg}
+Precipitation gradient study across three locations in Bavaria evaluating mature Norway spruce stands compared to mixed spruce-beech stands on Cambisols and Luvisols. Soil respiration (Rs) and heterotrophic respiration (Rh) measured biweekly during 2022-2023 vegetation periods with continuous soil temperature and moisture monitoring. Includes drought legacy experiment examining long-term effects of extreme drought (2014-2018 rainfall exclusion).
+
+\subsubsection{Netherlands}
+Study across multiple sites investigating effects of forest management on soil respiration in Scots pine forests on poor sandy soils, with treatments established in February-March 2019.
+\paragraph{Kroondomein} Soil CO2 flux measurements using EGM-5 analyzer with trenching for heterotrophic/autotrophic separation, continuous soil temperature and moisture monitoring with TOMST TMS-4 sensors.
+\paragraph{Zwolse Bos} Identical experimental design to Kroondomein with four management treatments: control, high-thinning (9\% BA reduction), shelterwood (61\% BA reduction), and clearcut (100\% BA reduction).
+\paragraph{Hoge Veluwe} Same four treatment design with biweekly CO2 measurements from May 2022-September 2024, continuous soil temperature and moisture monitoring.
+
+\subsubsection{France}
+\paragraph{St. Mitre} Mediterranean Aleppo pine forest on sandy loamy calcareous soils examining combined effects of thinning intensity and understory management. Established in 2007 with five treatments: intensive thinning with/without shrubs (I+, I-), moderate thinning with/without shrubs (M+, M-), and control (C). Monthly soil respiration measurements using EGM-5 CO2 analyzer with continuous microclimate monitoring using TOMST TMS-4 dataloggers.
+\paragraph{St. Christol} Mediterranean site with Quercus pubescens monoculture on Calcisol soils. Experimental design established April 2022 with five treatments across four blocks: control, 50\% and 100\% canopy removal with/without slash treatments. Total 40 plots with continuous soil temperature and moisture monitoring.
+
+\subsubsection{Spain}
+\paragraph{Gamiz} Northern Spain site at 580m elevation in Quercus faginea dominated forest on clay loam Luvisol. Experimental design established October 2021 with five treatments across four blocks: control, 50\% and 100\% canopy removal with/without slash. Total 40 plots with continuous soil temperature and moisture monitoring.
+
+\subsubsection{Slovakia}
+\paragraph{Dobroc} Site at 950m elevation on Dystric Cambisol comparing 70-year-old Norway spruce monoculture with adjacent mixed forest (spruce, beech, silver fir). Root exclusion trenching to separate heterotrophic/autotrophic respiration, biweekly CO2 measurements since August 2021 using LI-COR LI-7810 with continuous soil temperature and moisture monitoring. Site affected by bark beetle outbreak in 2022 followed by clearcut in 2023.
+\subsubsection{Romania}
+\paragraph{Dumbravita} Eastern Romania site at 544m elevation in Quercus robur monoculture on Cambisol soils. Experimental treatments established March 2022 with five treatments across four blocks: control, CD50+/-Slash, CD100+/-Slash. Total 40 plots with continuous soil temperature and moisture monitoring.
+
+
+\subsubsection{Sampling}
 
 \paragraph{Trenching}
 In most sites all treatments have both control and trenched subtreatments. The aim of the trenching is to remove all autotrophic respiration from the total soil respiration. Threnching areas were established (on an area of approximately 2 square meters) by digging trenches at a depth of approximately 30-40 cm and then placing root exclusion fabric around the trenched area. The fabric had around 50 $\mu$m mesh size, which prevents roots but allows mychorrizae to penetrate the area, as well as water.
@@ -172,8 +253,6 @@ Soil temperature and in some cases moisture have been recorded in the upper laye
 
 
 
-
-
 \subsection{The database}
 
 \subsubsection{Organization of the published dataset}
@@ -188,6 +267,7 @@ Each feather file, so each measurement, is associated to a line in the metadata 
 The metadata files are then collected together in one single general file in the root folder of the dataset (file "All\_sites.csv"), where the analyses in this study were performed.
 The dataset is distributed with both calculated flux values and raw measurements in case the user of the database would want to develop own flux estimation approaches.
 
+
 \subsubsection{Automatic trimming logic}
 Jani to write this.
 
@@ -195,7 +275,10 @@ Jani to write this.
 A table here, to write together with Jani
 
 
+
+
 \subsubsection{Descriptive analysis of the data}
+
 
 
 \paragraph{Recoding of the treatments}
@@ -240,21 +323,12 @@ where day\_year is the day of the year (1-365), peak\_day defines the timing of 
 where linear\_mult represents the multiplicative effect of root presence in non-trenched plots.
 
 \subsection{The Bayesian framework}
+Due to the computational requirements of the calibration, we employed a two-stage Bayesian inference approach to ensure robust parameter estimation and easier convergence. The procedure consisted of an initial calibration phase to identify the best starting value (to speed up convergence) followed by full MCMC sampling.
 
-We employed a two-stage Bayesian inference approach to ensure robust parameter estimation and convergence in this complex hierarchical model. The procedure consisted of an initial variational approximation phase followed by full MCMC sampling.
-
-\subsubsection{Variational inference for MAP estimation}
-Prior to MCMC sampling, we obtained maximum a posteriori (MAP) parameter estimates using stochastic variational inference (SVI) implemented in NumPyro. This pre-estimation step serves multiple purposes: it provides good starting values for the MCMC chains, reduces burn-in time, and helps identify potential convergence issues before computationally expensive full sampling.
-The SVI approach uses an AutoNormal guide, which assumes a mean-field variational approximation where each parameter is independently normally distributed. This approximation, while simpler than the true posterior, provides a computationally efficient way to locate the posterior mode. The optimization was performed using the Adam optimizer with a learning rate of 0.01, running for 3,000 iterations to ensure convergence of the variational parameters.
-
-The variational objective minimizes the evidence lower bound (ELBO):
-\begin{equation}
-\text{ELBO} = \mathbb{E}_{q_\phi(\theta)}[\log p(y|\theta) + \log p(\theta) - \log q_\phi(\theta)]
-\end{equation}
-where $q_\phi(\theta)$ is the variational approximation with parameters $\phi$, $p(y|\theta)$ is the likelihood, and $p(\theta)$ represents the prior distributions.
 
 \subsubsection{MCMC initialization and sampling}
-
+Prior to MCMC sampling, we obtained maximum a posteriori (MAP) parameter estimates using stochastic variational inference (SVI) implemented in NumPyro. This pre-estimation step provides good starting values for the MCMC chains, reduces burn-in time, and helps identify potential convergence issues before computationally expensive full sampling.
+The SVI approach uses an AutoNormal guide, which assumes a mean-field variational approximation where each parameter is independently normally distributed. This approximation, while simpler than the true posterior, provides a computationally efficient way to locate the posterior mode that will be later used for initializing the MCMC chains. The optimization was performed using the Adam optimizer with a learning rate of 0.01, running for 3,000 iterations to ensure convergence of the variational parameters.
 Using the MAP estimates from SVI, we initialized 24 parallel MCMC chains by adding small random perturbations (noise scale = 0.05) around the MAP values. This initialization strategy, known as "jittering," ensures that chains start from different but reasonable locations in parameter space, facilitating better exploration of the posterior distribution while avoiding poor local optima that can occur with random initialization.
 The MCMC sampling employed the No-U-Turn Sampler (NUTS) algorithm \citep{hoffman2014nuts}. NUTS is particularly well-suited for high-dimensional problems like our hierarchical model, as it can efficiently navigate complex posterior geometries. We configured NUTS with a target acceptance probability of 0.9.
 Each chain was run for 20,000 iterations total: 5,000 warmup samples, followed by 15,000 retained samples for posterior inference. The warmup phase allows NUTS to learn the local geometry of the posterior distribution, which is crucial for efficient sampling in subsequent iterations. The parallel chain approach enables both computational efficiency (especially in our case, run on a highly parallelized cluster, see Section~\ref{sec:implementation}) and robust convergence diagnostics through between-chain comparisons.
@@ -341,7 +415,7 @@ Model outputs provided posterior distributions for all parameters, enabling quan
 
 \subsubsection{Autotrophic and heterotrophic fluxes}
 
-\subsubsection{Moisture and temperature interactions}
+\subsubsection{Fluxes over time}
 % Time series
 \begin{figure}[H]
     \centering
@@ -360,7 +434,7 @@ Model outputs provided posterior distributions for all parameters, enabling quan
     \centering
     \includegraphics[width=0.8\textwidth]{"../ea_boxplot.png"}
     \caption{Model predictions here}
-    \label{fig:ea_boxplot}
+    \label{fig:model_fit}
 \end{figure}
 
 % E_0 parameter
@@ -399,6 +473,10 @@ Model outputs provided posterior distributions for all parameters, enabling quan
 \subsubsection{Data limitations}
 
 \paragraph{Mositure data}
+
+
+\paragraph{Temperature data}
+Netherlands measured only with TOMST at 10 cm depth
 
 
 
