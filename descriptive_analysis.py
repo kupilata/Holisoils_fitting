@@ -22,11 +22,6 @@ print(wholedb_co2.columns)
 print(wholedb_co2.info())
 
 
-# Replace DumbravitaTrench with Dumbravita
-# The "Trenched" boolean takes care of that
-wholedb_co2['siteid'] = wholedb_co2['siteid'].replace('DumbravitaTrench', 'Dumbravita')
-
-
 ###############Outlier removal
 
 z_scores = np.abs(stats.zscore(wholedb_co2['merged_flux'].dropna()))
