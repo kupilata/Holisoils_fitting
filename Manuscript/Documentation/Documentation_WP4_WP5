@@ -1,0 +1,26 @@
+
+WP4 sites followed a root exclusion protocol based on trenching,
+designed to isolate heterotrophic respiration from total soil
+respiration. This approach is particularly valuable for soil carbon
+modeling and ecosystem greenhouse gas (GHG) flux quantification. The
+trenched area measured 2 m², and soil temperature and moisture were
+monitored both inside and outside the trenches using TMS loggers (v4).
+Soil CO₂ fluxes were measured biweekly in both control and trenched
+plots, except during periods of low microbial activity (e.g., droughts
+or winter in northern regions), when measurements were conducted less
+frequently.
+WP5 sites, in contrast, were established prior to the start of the
+project and did not follow the standardized trenching protocol. Instead,
+they implemented disturbance treatments representative of common
+regional events, such as wildfires and logging, with undisturbed plots
+serving as controls. At these sites, soil properties were monitored
+throughout the experiment, alongside GHG fluxes and monthly litter
+inputs. Soil moisture and temperature were measured using TMS loggers
+(v4), as in WP4. However, only total soil CO₂ efflux was measured at WP5
+sites. Heterotrophic respiration was thus estimated using the empirical
+equation proposed by Bond-Lamberty et al. (2004).
+
+Bond-Lamberty, Ben, ChuankuanWang, and Stith Gower (Oct. 2004). “A
+global relationship between the heterotrophic and autotrophic
+components of soil respiration?” In: Global Change Biology 10, pp.
+1756–1766. DOI: 10.1111/j.1365-2486.2004.00816.x.
