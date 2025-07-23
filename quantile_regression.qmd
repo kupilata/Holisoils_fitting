@@ -1,0 +1,395 @@
+---
+title: "quantile_regression"
+format: html
+editor: visual
+---
+
+# Quantile regression
+
+```{r}
+#| label: load-data
+#| echo: true
+df <- read.csv("python_holisoils.csv", header = TRUE)
+head(df)
+sum(df$temp < -5, na.rm = TRUE)
+table(df$site, is.na(df$temp))
+
+```
+
+```{r}
+#| label: load-packaged-missing-values
+#| echo: true
+
+library(readr)
+library(dplyr)
+glimpse(df)
+sum(df$trenched == "False")
+sum(df$trenched == "True")
+sum(df$trenched == "")
+
+# We can see that the missing values are found in these 3 sites
+df %>%
+  group_by(site) %>%
+  summarise(empty_count = sum(trenched== "", na.rm = FALSE))
+
+# Let's change them too False and then make a boolean vector out of it
+df$trenched <- ifelse(df$trenched == "True", TRUE,
+                      ifelse(df$trenched %in% c("", "False"), FALSE, NA))
+df$trenched <- as.logical(df$trenched)
+
+df %>%
+  group_by(site) %>%
+  summarise(false_count = sum(trenched==FALSE, na.rm=TRUE),
+            true_count = sum(trenched==TRUE, na.rm=TRUE))
+
+# Let's inspect the temperature variable
+summary(df$temp)
+summary(df$resp)
+sapply(df, function(x) mean(is.na(x)))
+
+df$temp_missing <- is.na(df$temp)
+
+# Boxplot of resp based on temp missingness
+boxplot(resp ~ temp_missing, data = df, main = "resp by temp missingness")
+
+# Test if mean resp differs
+t.test(resp ~ temp_missing, data = df)
+```
+
+The missing temp data is not random in relation to resp. Dropping those rows would bias our models. Let's do predictive imputation using mice package.
+
+```{r}
+#| label: mice-imputation
+#| eval: false
+library(mice)
+
+table(df$site, is.na(df$temp))
+# Let's drop Kelheim and Saint Mitre
+df <- df[!(df$site %in% c("Kelheim-Parsberg", "Saint Mitre")), ]
+
+
+# Perform imputation (default method for numeric is pmm)
+
+# Step 1: Create method vector
+methods <- make.method(df)
+methods[] <- ""  # Don't impute anything by default
+methods["temp"] <- "pmm"  # Only impute temperature using predictive mean matching
+
+# Step 2: Define prediction matrix
+
+# lets create a prediction matrix to include only relevant variables
+pred <- make.predictorMatrix(df)
+
+# Zero out all predictors
+pred[,] <- 0
+
+# Only allow these variables to predict temperature
+pred["temp", c("day_year", "resp", "plot_id", "site")] <- 1
+
+# we need to factorize "site"
+df$site <- as.factor(df$site)
+
+# Step 3: Run mice with the custom method and predictor matrix
+imputed <- mice(df, method = methods, predictorMatrix = pred, m = 5, seed = 123)
+
+# Step 4: Extract imputed dataset (use 1st imputation for example)
+df_imputed <- complete(imputed, 1)
+
+sum(is.na(df_imputed$temp))
+
+imputed$loggedEvents
+```
+```{r}
+#| label: missing-removal
+#| eval: true
+# Here we remove observations with missing temp.
+df_imputed <- df[!is.na(df$temp), ]
+sum(df_imputed$temp_missing == TRUE)
+sum(df_imputed$temp_missing == FALSE)
+```
+
+Let's load inspect flux vs. temperature in trenched and untrenched data (imputed)
+
+```{r}
+#| label: imputed-scatterplots
+trenched_df_imputed <- df_imputed[df_imputed$trenched==TRUE,]
+untrenched_df_imputed <- df_imputed[df_imputed$trenched==FALSE,]
+
+library(ggplot2)
+for (i in c("trenched", "untrenched")) {
+  name <- paste0(i, "_df_imputed")
+  n_sites <- length(unique(get(name)$site))
+  
+  ggplot(data=get(name), aes(x = temp, y = resp, color = site, shape = site)) +
+  geom_point(size = 1, alpha = 0.3, na.rm = TRUE) +
+  scale_shape_manual(values = 1:n_sites) +
+  labs(
+    x = "Soil temperature at 5cm",
+    y = "CO2 flux",
+    title = paste0(name,": Scatterplot of co2 flux vs. soil temperature")
+  ) +
+  theme_minimal() -> p
+  print(p)
+}
+```
+
+Let's load inspect flux vs. temperature in trenched and untrenched data (non-imputed)
+
+```{r}
+#| label: unimputed-scatterplots
+trenched_df <- df[df$trenched==TRUE,]
+untrenched_df <- df[df$trenched==FALSE,]
+
+library(ggplot2)
+for (i in c("trenched", "untrenched")) {
+  name <- paste0(i, "_df")
+  n_sites <- length(unique(get(name)$site))
+  
+  ggplot(data=get(name), aes(x = temp, y = resp, color = site, shape = site)) +
+  geom_point(size = 1, alpha = 0.3, na.rm = TRUE) +
+  scale_shape_manual(values = 1:n_sites) +
+  labs(
+    x = "Soil temperature at 5cm",
+    y = "CO2 flux",
+    title = paste0(name,": Scatterplot of co2 flux vs. soil temperature")
+  ) +
+  theme_minimal() -> p
+  print(p)
+}
+```
+
+The imputation seems to be filling the bottom gap that we are interested in. Let's compare distributions more in depth before and after the imputation:
+
+```{r}
+#| label: imputed-original-comparison
+original <- df$temp
+imputed <- df_imputed$temp
+
+ggplot() +
+  geom_density(aes(x = original), color = "red", na.rm = TRUE) +
+  geom_density(aes(x = imputed), color = "blue") +
+  labs(title = "Temperature Distributions: Original vs. Imputed",
+       x = "Temperature", y = "Density") +
+  theme_minimal()
+```
+
+```{r}
+#| label: quantile-linear-regression-comparison
+library(quantreg)
+# pseudo r squared (Koenker & Machado pseudo R^2)
+rho <- function(tau, u) {
+  u * (tau - (u < 0))
+}
+
+# Custom function that returns rq model and pseudo R^2
+rq_with_pseudo_r2 <- function(formula, tau, data) {
+  # Fit full and null models
+  full_model <- rq(formula, tau = tau, data = data)
+  null_model <- rq(update(formula, . ~ 1), tau = tau, data = data)
+  
+  # Compute pseudo R^2
+  rho_full <- sum(rho(tau, residuals(full_model)))
+  rho_null <- sum(rho(tau, residuals(null_model)))
+  pseudo_r2 <- 1 - (rho_full / rho_null)
+  
+  # Return both model and pseudo R^2
+  list(
+    model = full_model,
+    pseudo_r2 = pseudo_r2
+  )
+}
+
+tau_val <- 0.05
+
+
+plot_qr <- function(data, tau_val, title_prefix = "") {
+  result <- rq_with_pseudo_r2(resp ~ temp, tau = tau_val, data = data)
+  n_obs <- sum(!is.na(data$resp) & !is.na(data$temp))
+  
+  p <- ggplot(data, aes(x = temp, y = resp)) +
+    geom_point(alpha = 0.3, na.rm = TRUE) +
+    geom_quantile(quantiles = tau_val, color = "red", size = 1) +
+    annotate("text", x = Inf, y = Inf,
+             label = paste0("R^2 = ", round(result$pseudo_r2, 3), "\nn = ", n_obs),
+             hjust = 1.1, vjust = 1.5, size = 4, color = "red") +
+    labs(
+      title = paste0(title_prefix, "Quantile Regression at ", tau_val*100, "th Percentile"),
+      x = "Soil temperature at 5cm",
+      y = "CO2 flux"
+    ) +
+    theme_minimal()
+  print(paste0(title_prefix, "Quantile Regression Summary with tau=", tau_val))
+  print(summary(result$model))
+  print(paste0("Koenker & Machado Pseudo R-squared: ", round(result$pseudo_r2, 3)))
+  print(p)
+  
+  return(result)
+}
+
+# Then call:
+qr_full <- plot_qr(df_imputed, tau_val)
+qr_trenched <- plot_qr(trenched_df_imputed, tau_val, "Trenched: ")
+qr_untrenched <- plot_qr(untrenched_df_imputed, tau_val, "Untrenched: ")
+
+
+# linear regression model
+plot_lm <- function(data, title_prefix = "") {
+  # Fit the linear model
+  lm_model <- lm(resp ~ temp, data = data)
+  summary_model <- summary(lm_model)
+  r_squared <- summary_model$r.squared
+  
+  # Count complete observations
+  n_obs <- sum(!is.na(data$resp) & !is.na(data$temp))
+  
+  # Print summary and R² similar to plot_qr
+  print(paste0(title_prefix, "Linear Regression Summary"))
+  print(summary_model)
+  print(paste0("R-squared: ", round(r_squared, 3)))
+  
+  # Create and print plot
+  p <- ggplot(data, aes(x = temp, y = resp)) +
+    geom_point(alpha = 0.3, na.rm = TRUE) +
+    geom_smooth(method = "lm", formula = y ~ x, color = "blue", se = TRUE, size = 1) +
+    annotate("text", x = Inf, y = Inf,
+             label = paste0("R² = ", round(r_squared, 3), "\nn = ", n_obs),
+             hjust = 1.1, vjust = 1.5, size = 4, color = "blue") +
+    labs(
+      title = paste0(title_prefix, "Linear Regression of CO₂ Flux vs. Soil Temperature"),
+      x = "Soil temperature at 5cm",
+      y = "CO₂ flux"
+    ) +
+    theme_minimal()
+  
+  print(p)
+  
+  # Return model and R²
+  invisible(list(
+    model = lm_model,
+    r_squared = r_squared
+  ))
+}
+
+
+# Full dataset
+lm_full <- plot_lm(df_imputed)
+
+# Trenched
+lm_trenched <- plot_lm(trenched_df_imputed, "Trenched: ")
+
+# Untrenched
+lm_untrenched <- plot_lm(untrenched_df_imputed, "Untrenched: ")
+
+```
+
+```{r}
+#| label: quantile-regression-optimization
+quantiles <- c(0.01, 0.02, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+best_val <- numeric(length(quantiles))
+names(best_val) <- quantiles
+
+# Best model for full data
+for (tau in quantiles) {
+  qr_full <- rq_with_pseudo_r2(formula = resp ~ temp, tau = tau, data = df_imputed)
+  best_val[as.character(tau)] <- qr_full$pseudo_r2
+}
+best_tau <- names(best_val)[which.max(best_val)]
+print(paste("Best tau value is:", best_tau))
+print(paste("The corresping pseudo r2 value for this tau is:", max(best_val)))
+
+
+# Let's fit the quantile regression model for the best tau value 0.15
+tau_val <- as.numeric(best_tau)
+
+qr_full <- plot_qr(df_imputed, tau_val)
+qr_trenched <- plot_qr(trenched_df_imputed, tau_val, "Trenched: ")
+qr_untrenched <- plot_qr(untrenched_df_imputed, tau_val, "Untrenched: ")
+```
+
+When we look at the data, it seems like the minimum respiration rates stay at 0 until the temperature is at 15 C. After this the minimum respiration rate starts increasing with temperature. Let's investigate this further by subsetting the data from a set threshold.
+
+```{r}
+#| label: quantile-from-threshold
+df_thresh <- df_imputed
+df_thresh$temp <- pmax(0, df_thresh$temp - 15)
+
+mod_qr <- plot_qr(df_thresh, tau_val = 0.02)
+
+# Best model for full data
+for (tau in quantiles) {
+  qr_full <- rq_with_pseudo_r2(formula = resp ~ temp, tau = tau, data = df_thresh)
+  best_val[as.character(tau)] <- qr_full$pseudo_r2
+}
+best_tau <- names(best_val)[which.max(best_val)]
+print(paste("Best tau value is:", best_tau))
+print(paste("The corresping pseudo r2 value for this tau is:", max(best_val)))
+
+
+# Let's fit the quantile regression model for the best tau value 0.15
+tau_val <- as.numeric(best_tau)
+
+qr_piecewise <- plot_qr(df_thresh, tau_val)
+```
+
+Let's try two segmented model (two different slopes for before and after temp15)
+
+```{r}
+#| label: two-segmented-quantile
+df_twoseg <- df_imputed
+temp <- df_twoseg$temp
+
+threshold <- 15
+
+df_twoseg$temp_below <- pmin(temp, threshold)
+df_twoseg$temp_above <- pmax(0, temp - threshold)
+
+twoseg_model <- rq_with_pseudo_r2(resp ~ temp_below + temp_above, tau = 0.02, data=df_twoseg)
+summary(twoseg_model$model)
+print(twoseg_model$pseudo_r2)
+
+coef <- coef(twoseg_model$model)
+
+ggplot(df_twoseg, aes(x = temp, y = resp)) +
+  geom_point(alpha = 0.3) +
+  geom_line(aes(y = coef[1] + coef[2] * pmin(temp, threshold) + coef[3] * pmax(0, temp - threshold)), color = "red", size = 1) +
+  geom_vline(xintercept = threshold, linetype = "dashed") +
+  labs(title = "Two-segment Quantile Regression (τ = 0.05)",
+       x = "Temperature",
+       y = "Respiration")
+
+```
+
+```{r}
+#| label: moving-window-minimum
+# Round temperatures to nearest integer
+df_window_minimum <- data.frame(
+  resp = df_imputed$resp,
+  temp = round(df_imputed$temp),
+  row.names = rownames(df_imputed)
+)
+
+# Compute min resp per 1-degree interval
+min_vals <- df_window_minimum %>%
+  group_by(temp) %>%
+  summarise(resp = min(resp, na.rm = TRUE), .groups = "drop")
+
+# Create full sequence of window temps (1-degree bins)
+windows <- seq(from = min(df_window_minimum$temp),
+               to   = max(df_window_minimum$temp),
+               by   = 1)
+
+# Create window_df and join in the minimum values
+window_df <- data.frame(temp = windows) %>%
+  left_join(min_vals, by = "temp")
+
+# lets remove outlier index[8]
+window_df <- window_df[-8,]
+
+ggplot(window_df, aes(x=temp, y=resp)) +
+  geom_point() +
+  geom_smooth(method = "loess", formula = y ~ x, color = "blue", se = TRUE, size = 1) +
+  labs(x = "Temperature", y = "Respiration (CO2 flux)") +
+  theme_minimal()
+plot(window_df$temp, window_df$resp)
+```
+

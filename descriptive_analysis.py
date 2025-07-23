@@ -46,9 +46,9 @@ print(f"Removed negative values: {len(wholedb_co2_clean) - len(wholedb_co2_posit
 
 # remove values above 5
 wholedb_co2_lowpass = wholedb_co2_positive[wholedb_co2_positive['merged_flux'] <= 5]
-print(f"Before removing negatives: {len(wholedb_co2_positive)} rows")
-print(f"After removing negatives: {len(wholedb_co2_lowpass)} rows")
-print(f"Removed negative values: {len(wholedb_co2_positive) - len(wholedb_co2_lowpass)} rows")      
+print(f"Before removing values above 5: {len(wholedb_co2_positive)} rows")
+print(f"After removing values above 5: {len(wholedb_co2_lowpass)} rows")
+print(f"Removed values above 5: {len(wholedb_co2_positive) - len(wholedb_co2_lowpass)} rows")      
 
 # Filter out rows where merged_flux is NaN
 wholedb_co2_lowpass = wholedb_co2_lowpass.dropna(subset=['merged_flux'])
@@ -108,6 +108,10 @@ np.unique(wholedb_co2_lowpass['siteid'])
 
 ############### Environmental variables plotting
 
+# Filter for trenched data only
+trenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == True]
+untrenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == False]
+
 print("=== NA Summary Before Filtering ===")
 print("Trenched Data:")
 trenched_na_summary = trenched_data.groupby('siteid')[['soil_temp_5cm', 'tsmoisture', 'merged_flux', 'treatment']].apply(lambda x: x.isna().sum())
@@ -124,32 +128,6 @@ print(trenched_data.groupby('siteid').size())
 print("\nUntrenched:")
 print(untrenched_data.groupby('siteid').size())
 
-# After filtering
-print("\n=== Rows Remaining After Filtering ===")
-print("Trenched:")
-print(plot_data_trenched.groupby('siteid').size())
-print("\nUntrenched:")
-print(plot_data_untrenched.groupby('siteid').size())
-
-# Summary of what was removed
-print("\n=== Rows Removed by Site ===")
-print("Trenched:")
-trenched_before = trenched_data.groupby('siteid').size()
-trenched_after = plot_data_trenched.groupby('siteid').size()
-trenched_removed = trenched_before.subtract(trenched_after, fill_value=0)
-print(trenched_removed)
-
-print("\nUntrenched:")
-untrenched_before = untrenched_data.groupby('siteid').size()
-untrenched_after = plot_data_untrenched.groupby('siteid').size()
-untrenched_removed = untrenched_before.subtract(untrenched_after, fill_value=0)
-print(untrenched_removed)
-
-
-# Filter for trenched data only
-trenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == True]
-untrenched_data = wholedb_co2_lowpass[wholedb_co2_lowpass['Trenched'] == False]
-
 # Remove rows with NaN in the variables we need
 plot_data_trenched_temp = trenched_data.dropna(subset=['soil_temp_5cm', 'merged_flux', 'treatment'])
 plot_data_untrenched_temp = untrenched_data.dropna(subset=['soil_temp_5cm', 'merged_flux', 'treatment'])
@@ -157,6 +135,42 @@ plot_data_untrenched_temp = untrenched_data.dropna(subset=['soil_temp_5cm', 'mer
 plot_data_trenched_moist = trenched_data.dropna(subset=['tsmoisture', 'merged_flux', 'treatment'])
 plot_data_untrenched_moist = untrenched_data.dropna(subset=['tsmoisture','merged_flux', 'treatment'])
 
+# After filtering
+print("\n=== Rows Remaining After Filtering ===")
+print("Trenched temperature:")
+print(plot_data_trenched_temp.groupby('siteid').size())
+print("Trenched moisture:")
+print(plot_data_trenched_moist.groupby('siteid').size())
+print("\nUntrenched temperature:")
+print(plot_data_untrenched_temp.groupby('siteid').size())
+print("\nUntrenched moisture:")
+print(plot_data_untrenched_moist.groupby('siteid').size())
+
+# Summary of what was removed
+print("\n=== Rows Removed by Site ===")
+print("Trenched temperature:")
+trenched_temp_before = trenched_data.groupby('siteid').size()
+trenched_temp_after = plot_data_trenched_temp.groupby('siteid').size()
+trenched_temp_removed = trenched_temp_before.subtract(trenched_temp_after, fill_value=0)
+print(trenched_temp_removed)
+
+print("Trenched moisture:")
+trenched_moist_before = trenched_data.groupby('siteid').size()
+trenched_moist_after = plot_data_trenched_moist.groupby('siteid').size()
+trenched_moist_removed = trenched_moist_before.subtract(trenched_moist_after, fill_value=0)
+print(trenched_moist_removed)
+
+print("\nUntrenched temperature:")
+untrenched_temp_before = untrenched_data.groupby('siteid').size()
+untrenched_temp_after = plot_data_untrenched_temp.groupby('siteid').size()
+untrenched_temp_removed = untrenched_temp_before.subtract(untrenched_temp_after, fill_value=0)
+print(untrenched_temp_removed)
+
+print("\nUntrenched moisture:")
+untrenched_moist_before = untrenched_data.groupby('siteid').size()
+untrenched_moist_after = plot_data_untrenched_moist.groupby('siteid').size()
+untrenched_moist_removed = untrenched_moist_before.subtract(untrenched_moist_after, fill_value=0)
+print(untrenched_moist_removed)
 
 
 # Resolution of figures, very high DPI with larger fonts 
@@ -181,10 +195,10 @@ np.unique(untrenched_data['siteid'])
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  
 
 # Calculate the common Y-axis range from both datasets
-all_flux_values = pd.concat([plot_data_trenched['merged_flux'], 
-                            plot_data_untrenched['merged_flux']])
-y_min = all_flux_values.min()
-y_max = all_flux_values.max()
+all_flux_values_temp = pd.concat([plot_data_trenched_temp['merged_flux'], 
+                            plot_data_untrenched_temp['merged_flux']])
+y_min = all_flux_values_temp.min()
+y_max = all_flux_values_temp.max()
 # Add small padding to the range
 y_padding = (y_max - y_min) * 0.05
 y_range = [y_min - y_padding, y_max + y_padding]
@@ -291,10 +305,10 @@ plt.show()
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 7))  
 
 # Calculate the common Y-axis range from both datasets
-all_flux_values = pd.concat([plot_data_trenched_moist['merged_flux'], 
+all_flux_values_moist = pd.concat([plot_data_trenched_moist['merged_flux'], 
                             plot_data_untrenched_moist['merged_flux']])
-y_min = all_flux_values.min()
-y_max = all_flux_values.max()
+y_min = all_flux_values_moist.min()
+y_max = all_flux_values_moist.max()
 # Add small padding to the range
 y_padding = (y_max - y_min) * 0.05
 y_range = [y_min - y_padding, y_max + y_padding]
