@@ -1,0 +1,629 @@
+/var/spool/slurmd/job29061248/slurm_script: line 13: myenv/bin/activate: No such file or directory
+PyArrow is available. You can use it.
+['Dobroc' 'Dumbravita' 'DumbravitaTrench' 'Gamiz' 'Karstula75'
+ 'Karstula76' 'Kelheim-Parsberg' 'Kranzberg-Freising' 'Kroondomein'
+ 'Zwolse bos' 'Llobera' 'NP Hoge Veluwe' 'Kroondomein ' 'Ränskälänkorpi'
+ 'Saint Mitre' 'Secanella' 'St Christol' 'Wasserburg-Maitenbeth'
+ 'Zwolse Bos']
+['Trenched' 'slash' 'no_slash' 'control' 'Control' nan 'Untrenched'
+ 'Trenched, without fabric lid' 'Trenched, with fabric lid' 'Ditch']
+Trenched
+<NA>    39617
+True    19899
+Name: count, dtype: Int64
+['DP-MC' 'DP-MIX' 'thinning' 'control' 'clear_cut'
+ 'grass+shrubs/with understorey' 'grass+shrubs/no understorey'
+ 'grass/with understorey' 'grass/no understorey' '-' 'Control'
+ 'Nitrogen fertilization' 'SB-Mix' 'Spruce' 'Shelterwood' 'High-thinning'
+ 'Clearcut' 'Low thinning' 'Low thinning + prescribed burning'
+ 'High thinning + prescribed burning' 'Continues cover forestry' 'Ditch'
+ 'Medium thinning / Trenching'
+ 'Medium thinning / Pine without understory vegetation'
+ 'Medium thinning / Pine with understory vegetation'
+ 'High thinning / Trenching'
+ 'High thinning / Pine without understory vegetation'
+ 'High thinning / Pine with understory vegetation'
+ 'No thinning / Trenching'
+ 'No thinning / Pine without understory vegetation']
+47318    True
+47319    True
+47320    True
+47321    True
+47326    True
+         ... 
+50051    True
+50056    True
+50057    True
+50058    True
+50059    True
+Name: Trenched, Length: 347, dtype: boolean
+['Dobroc' 'DumbravitaTrench' 'Karstula75' 'Karstula76' 'Kelheim-Parsberg'
+ 'Kranzberg-Freising' 'Zwolse Bos' 'Kroondomein' 'Llobera'
+ 'NP Hoge Veluwe' 'Ränskälänkorpi' 'Saint Mitre' 'Secanella'
+ 'Wasserburg-Maitenbeth']
+Trenched
+False    30672
+True     19092
+<NA>      9752
+Name: count, dtype: Int64
+0
+['DP-MC' 'DP-MIX' 'SB-Mix' 'Spruce']
+['Trenched' 'Untrenched']
+0
+10952
+['Trenched']
+['Untrenched']
+['Trenched']
+['control' 'mixture']
+['Control' 'Shelterwood' 'High-thinning' 'Clearcut'
+ 'Medium thinning / Trenching'
+ 'Medium thinning / Pine without understory vegetation'
+ 'Medium thinning / Pine with understory vegetation'
+ 'High thinning / Trenching'
+ 'High thinning / Pine without understory vegetation'
+ 'High thinning / Pine with understory vegetation'
+ 'No thinning / Trenching'
+ 'No thinning / Pine without understory vegetation']
+['Untrenched' 'Trenched' nan]
+['control' 'shelterwood' 'high-thinning' 'clearcut' 'medium-thinning'
+ 'medium-thinning_no_understorey' 'high-thinning_no_understorey'
+ 'no-thinning']
+<BooleanArray>
+[<NA>]
+Length: 1, dtype: boolean
+<BooleanArray>
+[<NA>]
+Length: 1, dtype: boolean
+<BooleanArray>
+[True]
+Length: 1, dtype: boolean
+<BooleanArray>
+[<NA>]
+Length: 1, dtype: boolean
+['thinning' 'control' 'clear_cut' '-']
+['slash' 'no_slash' 'control' nan]
+['Dumbravita' 'Gamiz' 'St Christol']
+['thinning' 'control' 'clear_cut' '']
+['thinning' 'control' 'clear_cut' '']
+['thinning_slash' 'thinning' 'control' 'clearcut' 'clearcut_slash' ''
+ 'control_slash']
+15504    <NA>
+15529    <NA>
+Name: control, dtype: boolean
+15504    Gamiz
+15529    Gamiz
+Name: siteid, dtype: object
+['Low thinning' 'High-thinning' 'Control'
+ 'Low thinning + prescribed burning' 'High thinning + prescribed burning']
+['Untrenched' 'Trenched' nan]
+['low-thinning' 'high-thinning' 'control' 'low-thinning+burning'
+ 'high-thinning+burning']
+['Control' 'Nitrogen fertilization']
+['Trenched' 'Untrenched' 'Trenched, without fabric lid' nan]
+Trenched
+True    2456
+Name: count, dtype: Int64
+Trenched
+True    1672
+Name: count, dtype: Int64
+Trenched
+False    6128
+Name: count, dtype: Int64
+['control' 'nitrogen']
+['Clearcut' 'Continues cover forestry' 'Control' 'Ditch']
+['Untrenched' 'Trenched' 'Trenched, with fabric lid' 'Ditch' nan]
+['clearcut' 'CCF' 'control' 'ditch']
+['grass+shrubs/with understorey' 'grass+shrubs/no understorey'
+ 'grass/with understorey' 'grass/no understorey']
+['Trenched' 'Control']
+['grass+shrubs_with_understorey' 'grass+shrubs_no_understorey'
+ 'grass_with_understorey' 'grass_no_understorey']
+<BooleanArray>
+[True]
+Length: 1, dtype: boolean
+['Dumbravita' 'Gamiz' 'St Christol']
+siteid
+Gamiz          4674
+Dumbravita     3600
+St Christol    1476
+Name: count, dtype: int64
+siteid
+DumbravitaTrench         3199
+Secanella                3125
+Llobera                  2735
+Dobroc                   2304
+Karstula76               2104
+Karstula75               2024
+Saint Mitre              1049
+Kranzberg-Freising        816
+Wasserburg-Maitenbeth     642
+Kelheim-Parsberg          622
+Ränskälänkorpi            388
+Zwolse Bos                 48
+Kroondomein                24
+NP Hoge Veluwe             12
+Name: count, dtype: int64
+siteid
+Ränskälänkorpi           9982
+Dobroc                   3456
+Karstula76               3148
+Secanella                3147
+Karstula75               3000
+Llobera                  2946
+Saint Mitre              1745
+Kranzberg-Freising       1220
+Wasserburg-Maitenbeth     958
+Kelheim-Parsberg          934
+Zwolse Bos                 72
+Kroondomein                36
+NP Hoge Veluwe             28
+Name: count, dtype: int64
+treatment
+control                           17361
+clearcut                           5847
+nitrogen                           5084
+mixture                            4480
+high-thinning                      3184
+low-thinning+burning               2495
+high-thinning+burning              2429
+ditch                              2308
+low-thinning                       2256
+                                   2226
+CCF                                1981
+thinning                           1517
+thinning_slash                     1500
+clearcut_slash                     1500
+grass_with_understorey             1440
+grass+shrubs_with_understorey       960
+medium-thinning                     703
+no-thinning                         697
+grass_no_understorey                479
+medium-thinning_no_understorey      349
+high-thinning_no_understorey        348
+grass+shrubs_no_understorey         320
+shelterwood                          50
+Name: count, dtype: int64
+Treatment: control
+Sites: ['Dobroc', 'Dumbravita', 'Gamiz', 'Karstula', 'Kelheim-Parsberg', 'Kranzberg-Freising', 'Kroondomein', 'Llobera', 'NP Hoge Veluwe', 'Ränskälänkorpi', 'Secanella', 'St Christol', 'Wasserburg-Maitenbeth', 'Zwolse Bos']
+----------------------------------------
+Treatment: mixture
+Sites: ['Dobroc', 'Kelheim-Parsberg', 'Wasserburg-Maitenbeth']
+----------------------------------------
+Treatment: thinning_slash
+Sites: ['Dumbravita', 'Gamiz', 'St Christol']
+----------------------------------------
+Treatment: thinning
+Sites: ['Dumbravita', 'Gamiz', 'St Christol']
+----------------------------------------
+Treatment: clearcut
+Sites: ['Dumbravita', 'Gamiz', 'Kroondomein', 'NP Hoge Veluwe', 'Ränskälänkorpi', 'St Christol', 'Zwolse Bos']
+----------------------------------------
+Treatment: clearcut_slash
+Sites: ['Dumbravita', 'Gamiz', 'St Christol']
+----------------------------------------
+Treatment: grass+shrubs_with_understorey
+Sites: ['Dumbravita']
+----------------------------------------
+Treatment: grass+shrubs_no_understorey
+Sites: ['Dumbravita']
+----------------------------------------
+Treatment: grass_with_understorey
+Sites: ['Dumbravita']
+----------------------------------------
+Treatment: grass_no_understorey
+Sites: ['Dumbravita']
+----------------------------------------
+Treatment: 
+Sites: ['Gamiz']
+----------------------------------------
+Treatment: nitrogen
+Sites: ['Karstula']
+----------------------------------------
+Treatment: shelterwood
+Sites: ['Kroondomein', 'NP Hoge Veluwe', 'Zwolse Bos']
+----------------------------------------
+Treatment: high-thinning
+Sites: ['Kroondomein', 'Llobera', 'NP Hoge Veluwe', 'Saint Mitre', 'Secanella', 'Zwolse Bos']
+----------------------------------------
+Treatment: low-thinning
+Sites: ['Llobera', 'Secanella']
+----------------------------------------
+Treatment: low-thinning+burning
+Sites: ['Llobera', 'Secanella']
+----------------------------------------
+Treatment: high-thinning+burning
+Sites: ['Llobera', 'Secanella']
+----------------------------------------
+Treatment: CCF
+Sites: ['Ränskälänkorpi']
+----------------------------------------
+Treatment: ditch
+Sites: ['Ränskälänkorpi']
+----------------------------------------
+Treatment: medium-thinning
+Sites: ['Saint Mitre']
+----------------------------------------
+Treatment: medium-thinning_no_understorey
+Sites: ['Saint Mitre']
+----------------------------------------
+Treatment: high-thinning_no_understorey
+Sites: ['Saint Mitre']
+----------------------------------------
+Treatment: no-thinning
+Sites: ['Saint Mitre']
+----------------------------------------
+<class 'pandas.core.frame.DataFrame'>
+Index: 37628 entries, 0 to 59515
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             37628 non-null  int64  
+ 1   date           37628 non-null  object 
+ 2   merged_flux    31009 non-null  float64
+ 3   soil_temp_5cm  27337 non-null  float64
+ 4   tsmoisture     16456 non-null  float64
+ 5   siteid         37628 non-null  object 
+ 6   point          37628 non-null  object 
+ 7   country        37628 non-null  object 
+ 8   treatment      37628 non-null  object 
+ 9   Trenched       37628 non-null  boolean
+ 10  control        10450 non-null  boolean
+dtypes: boolean(2), float64(3), int64(1), object(5)
+memory usage: 3.0+ MB
+<class 'pandas.core.frame.DataFrame'>
+Index: 1018 entries, 29067 to 31101
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             1018 non-null   int64  
+ 1   date           1018 non-null   object 
+ 2   merged_flux    0 non-null      float64
+ 3   soil_temp_5cm  0 non-null      float64
+ 4   tsmoisture     0 non-null      float64
+ 5   siteid         1018 non-null   object 
+ 6   point          1018 non-null   object 
+ 7   country        1018 non-null   object 
+ 8   treatment      1018 non-null   object 
+ 9   Trenched       1018 non-null   boolean
+ 10  control        1018 non-null   boolean
+dtypes: boolean(2), float64(3), int64(1), object(5)
+memory usage: 83.5+ KB
+None
+<class 'pandas.core.frame.DataFrame'>
+Index: 800 entries, 57836 to 59434
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             800 non-null    int64  
+ 1   date           800 non-null    object 
+ 2   merged_flux    0 non-null      float64
+ 3   soil_temp_5cm  0 non-null      float64
+ 4   tsmoisture     0 non-null      float64
+ 5   siteid         800 non-null    object 
+ 6   point          800 non-null    object 
+ 7   country        800 non-null    object 
+ 8   treatment      800 non-null    object 
+ 9   Trenched       800 non-null    boolean
+ 10  control        389 non-null    boolean
+dtypes: boolean(2), float64(3), int64(1), object(5)
+memory usage: 65.6+ KB
+None
+<class 'pandas.core.frame.DataFrame'>
+Index: 778 entries, 27511 to 29065
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             778 non-null    int64  
+ 1   date           778 non-null    object 
+ 2   merged_flux    748 non-null    float64
+ 3   soil_temp_5cm  0 non-null      float64
+ 4   tsmoisture     0 non-null      float64
+ 5   siteid         778 non-null    object 
+ 6   point          778 non-null    object 
+ 7   country        778 non-null    object 
+ 8   treatment      778 non-null    object 
+ 9   Trenched       778 non-null    boolean
+ 10  control        389 non-null    boolean
+dtypes: boolean(2), float64(3), int64(1), object(5)
+memory usage: 63.8+ KB
+None
+<class 'pandas.core.frame.DataFrame'>
+Index: 37628 entries, 0 to 59515
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   id             37628 non-null  int64  
+ 1   date           37628 non-null  object 
+ 2   merged_flux    31009 non-null  float64
+ 3   soil_temp_5cm  27337 non-null  float64
+ 4   tsmoisture     16456 non-null  float64
+ 5   siteid         37628 non-null  object 
+ 6   point          37628 non-null  object 
+ 7   country        37628 non-null  object 
+ 8   treatment      37628 non-null  object 
+ 9   Trenched       37628 non-null  boolean
+ 10  control        10450 non-null  boolean
+dtypes: boolean(2), float64(3), int64(1), object(5)
+memory usage: 3.0+ MB
+None
+=== PROPORTION OF MISSING VALUES IN TEMP, MOIST & FLUX IN EACH SITE ===
+                       soil_temp_5cm  tsmoisture  merged_flux
+siteid                                                       
+Dobroc                          0.26        0.19         0.03
+Dumbravita                      0.00        0.06         0.00
+Gamiz                           0.31        0.28         0.00
+Karstula                        0.00        1.00         0.57
+Kelheim-Parsberg                1.00        1.00         0.04
+Kranzberg-Freising              1.00        1.00         1.00
+Kroondomein                     0.00        1.00         0.02
+Llobera                         0.21        0.33         0.00
+NP Hoge Veluwe                  0.00        1.00         0.00
+Ränskälänkorpi                  0.22        1.00         0.37
+Saint Mitre                     1.00        1.00         0.02
+Secanella                       0.25        0.31         0.00
+St Christol                     0.19        1.00         0.02
+Wasserburg-Maitenbeth           1.00        1.00         1.00
+Zwolse Bos                      0.00        1.00         0.00
+=== TOTAL PROPORTION OF MISSING VALUES PER COLUMN ===
+soil_temp_5cm    0.27
+tsmoisture       0.56
+merged_flux      0.18
+dtype: float64
+                        non_missing             ... missing_pct total
+                      soil_temp_5cm tsmoisture  ... merged_flux     0
+siteid                                          ...                  
+Dobroc                         2120       2319  ...         2.7  2880
+Dumbravita                     6799       6359  ...         0.0  6799
+Gamiz                          2448       2568  ...         0.0  3561
+Karstula                       5138          0  ...        57.0  5138
+Kelheim-Parsberg                  0          0  ...         3.9   778
+Kranzberg-Freising                0          0  ...       100.0  1018
+Kroondomein                      60          0  ...         1.7    60
+Llobera                        2864       2439  ...         0.0  3617
+NP Hoge Veluwe                   40          0  ...         0.0    40
+Ränskälänkorpi                 3521          0  ...        36.9  4517
+Saint Mitre                       0          0  ...         2.3  2794
+Secanella                      3034       2771  ...         0.0  4030
+St Christol                    1193          0  ...         2.0  1476
+Wasserburg-Maitenbeth             0          0  ...       100.0   800
+Zwolse Bos                      120          0  ...         0.0   120
+
+[15 rows x 10 columns]
+Index(['id', 'date', 'merged_flux', 'soil_temp_5cm', 'tsmoisture', 'siteid',
+       'point', 'country', 'treatment', 'Trenched', 'control', 'day_year',
+       'year'],
+      dtype='object')
+Rows before z-score filtering: 37628
+Rows after z-score filtering: 37627
+Rows removed with z-score filtering: 1
+141
+Rows before negative removal: 37627
+Rows after negative removal: 37486
+Rows removed with negative removal: 141
+Rows removed with flux value above 5: 7
+Rows removed without a flux value: 6619
+<class 'pandas.core.frame.DataFrame'>
+Index: 30860 entries, 0 to 59515
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id             30860 non-null  int64         
+ 1   date           30860 non-null  datetime64[ns]
+ 2   merged_flux    30860 non-null  float64       
+ 3   soil_temp_5cm  22923 non-null  float64       
+ 4   tsmoisture     16389 non-null  float64       
+ 5   siteid         30860 non-null  object        
+ 6   point          30860 non-null  object        
+ 7   country        30860 non-null  object        
+ 8   treatment      30860 non-null  object        
+ 9   Trenched       30860 non-null  boolean       
+ 10  control        7110 non-null   boolean       
+ 11  day_year       30860 non-null  int32         
+ 12  year           30860 non-null  int32         
+dtypes: boolean(2), datetime64[ns](1), float64(3), int32(2), int64(1), object(4)
+memory usage: 2.7+ MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Index: 30860 entries, 0 to 59515
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id             30860 non-null  int64         
+ 1   date           30860 non-null  datetime64[ns]
+ 2   merged_flux    30860 non-null  float64       
+ 3   soil_temp_5cm  22923 non-null  float64       
+ 4   tsmoisture     16389 non-null  float64       
+ 5   siteid         30860 non-null  category      
+ 6   point          30860 non-null  object        
+ 7   country        30860 non-null  object        
+ 8   treatment      30860 non-null  object        
+ 9   Trenched       30860 non-null  boolean       
+ 10  control        7110 non-null   boolean       
+ 11  day_year       30860 non-null  int32         
+ 12  year           30860 non-null  int32         
+dtypes: boolean(2), category(1), datetime64[ns](1), float64(3), int32(2), int64(1), object(3)
+memory usage: 2.5+ MB
+<class 'pandas.core.frame.DataFrame'>
+Index: 30860 entries, 0 to 59515
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id             30860 non-null  int64         
+ 1   date           30860 non-null  datetime64[ns]
+ 2   merged_flux    30860 non-null  float64       
+ 3   soil_temp_5cm  22923 non-null  float64       
+ 4   tsmoisture     16389 non-null  float64       
+ 5   siteid         30860 non-null  category      
+ 6   point          30860 non-null  object        
+ 7   country        30860 non-null  object        
+ 8   treatment      30860 non-null  object        
+ 9   Trenched       30860 non-null  boolean       
+ 10  control        7110 non-null   boolean       
+ 11  day_year       30860 non-null  int32         
+ 12  year           30860 non-null  int32         
+dtypes: boolean(2), category(1), datetime64[ns](1), float64(3), int32(2), int64(1), object(3)
+memory usage: 2.5+ MB
+Numerical Variables Summary:
+                   Mean ± SD  Median  Min    Max  Q1 (25%)  Q3 (75%)    IQR
+merged_flux       0.37 ± 0.3    0.29  0.0   4.22      0.17      0.49   0.33
+soil_temp_5cm   14.33 ± 8.06   13.75 -8.0  41.60      8.50     19.00  10.50
+tsmoisture     21.62 ± 11.67   20.80  0.0  53.90     12.00     29.60  17.60
+Categorical Variables Summary:
+     Variable                        Category  Count  Percentage (%)
+0      siteid                      Dumbravita   6787            22.0
+1      siteid                       Secanella   4028            13.1
+2      siteid                         Llobera   3611            11.7
+3      siteid                           Gamiz   3548            11.5
+4      siteid                          Dobroc   2800             9.1
+5      siteid                  Ränskälänkorpi   2766             9.0
+6      siteid                     Saint Mitre   2722             8.8
+7      siteid                        Karstula   2199             7.1
+8      siteid                     St Christol   1434             4.6
+9      siteid                Kelheim-Parsberg    748             2.4
+10     siteid                      Zwolse Bos    120             0.4
+11     siteid                     Kroondomein     58             0.2
+12     siteid                  NP Hoge Veluwe     39             0.1
+13  treatment                         control   6430            20.8
+14  treatment                        clearcut   2721             8.8
+15  treatment                   high-thinning   2275             7.4
+16  treatment                         mixture   1759             5.7
+17  treatment            low-thinning+burning   1607             5.2
+18  treatment           high-thinning+burning   1550             5.0
+19  treatment                        thinning   1506             4.9
+20  treatment                  thinning_slash   1495             4.8
+21  treatment                  clearcut_slash   1481             4.8
+22  treatment          grass_with_understorey   1433             4.6
+23  treatment                    low-thinning   1429             4.6
+24  treatment                                   1108             3.6
+25  treatment                        nitrogen   1071             3.5
+26  treatment   grass+shrubs_with_understorey    960             3.1
+27  treatment                 medium-thinning    695             2.3
+28  treatment                     no-thinning    679             2.2
+29  treatment                           ditch    592             1.9
+30  treatment                             CCF    541             1.8
+31  treatment            grass_no_understorey    479             1.6
+32  treatment  medium-thinning_no_understorey    345             1.1
+33  treatment    high-thinning_no_understorey    336             1.1
+34  treatment     grass+shrubs_no_understorey    320             1.0
+35  treatment                     shelterwood     48             0.2
+36   Trenched                           False  20369            66.0
+37   Trenched                            True  10491            34.0
+<class 'pandas.core.frame.DataFrame'>
+Index: 30860 entries, 0 to 59515
+Data columns (total 13 columns):
+ #   Column         Non-Null Count  Dtype         
+---  ------         --------------  -----         
+ 0   id             30860 non-null  int64         
+ 1   date           30860 non-null  datetime64[ns]
+ 2   merged_flux    30860 non-null  float64       
+ 3   soil_temp_5cm  22923 non-null  float64       
+ 4   tsmoisture     16389 non-null  float64       
+ 5   siteid         30860 non-null  category      
+ 6   point          30860 non-null  object        
+ 7   country        30860 non-null  object        
+ 8   treatment      30860 non-null  object        
+ 9   Trenched       30860 non-null  boolean       
+ 10  control        7110 non-null   boolean       
+ 11  day_year       30860 non-null  int32         
+ 12  year           30860 non-null  int32         
+dtypes: boolean(2), category(1), datetime64[ns](1), float64(3), int32(2), int64(1), object(3)
+memory usage: 2.5+ MB
+point
+1      6
+10     5
+100    5
+101    6
+102    6
+      ..
+95     6
+96     5
+97     5
+98     5
+99     5
+Name: siteid, Length: 162, dtype: int64
+siteid  Dobroc  Dumbravita  Gamiz  ...  Secanella  St Christol  Zwolse Bos
+point                              ...                                    
+1            0          70     35  ...          0            0           0
+10           0          70     35  ...          0            0           0
+100          0          30     24  ...          0            0           3
+101          0          30     25  ...          0           13           3
+102          0          30     26  ...          0           13           3
+...        ...         ...    ...  ...        ...          ...         ...
+95           0          29     26  ...          0            0           3
+96           0          30     26  ...          0            0           3
+97           0          29     26  ...          0            0           3
+98           0          30     26  ...          0            0           3
+99           0          30     26  ...          0            0           3
+
+[162 rows x 13 columns]
+Dobroc: {False: 1679, True: 1121}
+Dumbravita: {False: 3595, True: 3192}
+Gamiz: {False: 3548}
+Skipping site 'Gamiz' — missing one treatment type (Trenched=True or False)
+Karstula: {False: 1321, True: 878}
+Kelheim-Parsberg: {False: 449, True: 299}
+Kroondomein: {False: 34, True: 24}
+Zwolse Bos: {False: 72, True: 48}
+Llobera: {False: 1911, True: 1700}
+NP Hoge Veluwe: {False: 27, True: 12}
+Ränskälänkorpi: {False: 2582, True: 184}
+Saint Mitre: {False: 1701, True: 1021}
+Secanella: {False: 2016, True: 2012}
+St Christol: {False: 1434}
+Skipping site 'St Christol' — missing one treatment type (Trenched=True or False)
+Index([False, True], dtype='boolean', name='Trenched')
+<class 'pandas.core.frame.DataFrame'>
+Index: 30860 entries, 0 to 59515
+Data columns (total 11 columns):
+ #   Column         Non-Null Count  Dtype   
+---  ------         --------------  -----   
+ 0   date           30860 non-null  object  
+ 1   siteid         30860 non-null  category
+ 2   soil_temp_5cm  22923 non-null  float64 
+ 3   tsmoisture     16389 non-null  float64 
+ 4   country        30860 non-null  object  
+ 5   Trenched       30860 non-null  boolean 
+ 6   treatment      30860 non-null  object  
+ 7   control        7110 non-null   boolean 
+ 8   merged_flux    30860 non-null  float64 
+ 9   day_year       30860 non-null  int32   
+ 10  year           30860 non-null  int32   
+dtypes: boolean(2), category(1), float64(3), int32(2), object(3)
+memory usage: 2.0+ MB
+Plotting merged_flux vs. soil_temp_5cm, by country, trenched = all
+Plotting merged_flux vs. tsmoisture, by country, trenched = all
+Plotting soil_temp_5cm vs. tsmoisture, by country, trenched = all
+Plotting merged_flux vs. soil_temp_5cm, by siteid, trenched = all
+Plotting merged_flux vs. tsmoisture, by siteid, trenched = all
+Plotting soil_temp_5cm vs. tsmoisture, by siteid, trenched = all
+Plotting merged_flux vs. soil_temp_5cm, by treatment, trenched = all
+Plotting merged_flux vs. tsmoisture, by treatment, trenched = all
+Plotting soil_temp_5cm vs. tsmoisture, by treatment, trenched = all
+Plotting merged_flux vs. soil_temp_5cm, by country, trenched = True
+Plotting merged_flux vs. tsmoisture, by country, trenched = True
+Plotting soil_temp_5cm vs. tsmoisture, by country, trenched = True
+Plotting merged_flux vs. soil_temp_5cm, by siteid, trenched = True
+Plotting merged_flux vs. tsmoisture, by siteid, trenched = True
+Plotting soil_temp_5cm vs. tsmoisture, by siteid, trenched = True
+Plotting merged_flux vs. soil_temp_5cm, by treatment, trenched = True
+Plotting merged_flux vs. tsmoisture, by treatment, trenched = True
+Plotting soil_temp_5cm vs. tsmoisture, by treatment, trenched = True
+Plotting merged_flux vs. soil_temp_5cm, by country, trenched = False
+Plotting merged_flux vs. tsmoisture, by country, trenched = False
+Plotting soil_temp_5cm vs. tsmoisture, by country, trenched = False
+Plotting merged_flux vs. soil_temp_5cm, by siteid, trenched = False
+Plotting merged_flux vs. tsmoisture, by siteid, trenched = False
+Plotting soil_temp_5cm vs. tsmoisture, by siteid, trenched = False
+Plotting merged_flux vs. soil_temp_5cm, by treatment, trenched = False
+Plotting merged_flux vs. tsmoisture, by treatment, trenched = False
+Plotting soil_temp_5cm vs. tsmoisture, by treatment, trenched = False
+
+real	10m52.856s
+user	10m25.677s
+sys	0m13.726s
+JobID            MaxRSS    Elapsed     ReqMem      State 
+------------ ---------- ---------- ---------- ---------- 
+29061248                  00:10:59         8G    RUNNING 
+29061248.ba+              00:10:59               RUNNING 
+29061248.ex+              00:10:59               RUNNING 
+Job ended at: Wed Jul 23 11:51:48 EEST 2025
