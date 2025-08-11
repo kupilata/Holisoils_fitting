@@ -18,7 +18,7 @@ else:
 # LOAD DATA
 # =========
 
-wholedb = pd.read_csv("../../Taavi/All_sites.csv", low_memory = False)  # if you have pyarrow installed
+wholedb = pd.read_csv("./All_sites.csv", low_memory = False)  # if you have pyarrow installed
 print(wholedb['siteid'].unique())
 
 # ================
