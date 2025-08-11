@@ -4,3 +4,4 @@ jax-env/
 posterior_samples.pt
 .Rproj.user
 *.Rproj
+Manuscript/Documentation/.DS_Store
